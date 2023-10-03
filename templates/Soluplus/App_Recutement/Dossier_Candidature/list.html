@@ -1,0 +1,79 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                DOSSIER CANDIDATURES
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Reference</th>
+                                        <th>Titre</th>
+                                        <th>Date_Publish</th>
+                                        <th>Localisation</th>
+                                        <th>Type Contrat</th>
+                                        <th>Entreprise</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for item in model %}
+                                        <tr>
+                                            <td>
+                                                <a href="{% url 'app_recrutement_detail_candidature' item.id %}">{{ item.reference }}</a>
+                                            </td>
+                                            <td>{{item.titre}}</td>
+                                            <td>{{item.datepublish | date:'d/m/Y'}}</td>
+                                            <td>{{item.localisation}}</td>
+                                            <td>{{item.typecontrat}}</td>
+                                            <td>{{item.entreprise}}</td>
+                                            <td>
+                                                {% if item.status == 1 %}
+                                                   <span style="color:#1BA160;">en cours</span>
+                                                {% elif item.status == 2 %}
+                                                   <span style="color:#DD5145;">Cloturée</span>
+                                                {% endif %}
+                                            </td>
+                                            <!-- <td>{{item.cv.name}}</td>
+                                            <td>{{item.motivation.name}}</td>
+                                            <td>
+                                                <ul>
+                                                    {% for el in item.diplome.all %}
+                                                    <li>{{ el.file.name }}</li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </td> -->
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+
+
+{% endblock %}

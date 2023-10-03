@@ -1,0 +1,64 @@
+/*@import url(http://fonts.googleapis.com/css?family=Nunito:200,150,350);*/
+@font-face {
+    font-family: 'Glyphicons Halflings';
+  
+    src: url('fonts/glyphicons-halflings-regular.eot');
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+
+@font-face {
+    font-family: Gentium,'Nunito', sans-serif;
+    src: url(http://example.com/fonts/Gentium.otf);
+}
+
+body { 
+        font-family: Gentium, sans-serif, serif !important ;
+        font-size: small;    
+    }
+
+@page {
+    size: "A4";
+    margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+    font-family: Gentium, sans-serif, serif !important ;
+}
+
+main{
+    margin-bottom: 2.5cm;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2.5cm;
+    width: 100%;
+    background-color: #1a1a1a;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 2.5cm;
+    width: 100%;
+}
+
+table {
+border-collapse:collapse;
+width:100%;
+
+}
+th, td {
+border:1px solid black;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+td {
+text-align:center;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+caption {
+font-weight:bold
+}
+

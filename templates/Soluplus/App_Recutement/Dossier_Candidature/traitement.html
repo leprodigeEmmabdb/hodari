@@ -1,0 +1,146 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li class="active">Dashboard</li>
+            <li><a href="{% url 'app_recrutement_list_candidats' %}">Accueil</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Candidature de {{model.candidat.prenom}} - {{model.candidat.nom}}
+            </div>
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-lg-offset-0 col-lg-12">
+                        <div class="col-md-2">
+                            <form class="needs-validation" novalidate method="POST" id="form1" action="{% url 'app_recrutement_traite_candidature_json' %}">
+                                {% csrf_token %}
+                                <input type="text" name="ref_valide" value="{{model.id}}" style="display:none;">
+                                <input type="number" name="statut_val" value="2" style="display:none;">
+                                <button class="btn btn-success waves-effect waves-light" type="submit" >Valider</button>
+                            </form>
+                        </div>
+
+                        <div class="col-md-2">
+                            <form class="needs-validation" novalidate method="POST" id="form2" action="{% url 'app_recrutement_traitement_decline_offre' %}">
+                                {% csrf_token %}
+                                <input type="text" name="ref_decline" value="{{model.id}}" style="display:none;">
+                                <input type="number" name="statut_decline" value="3" style="display:none;">
+                                <button class="btn btn-default waves-effect" type="submit">Decliner</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                <br>
+                <h6 class="affiche_detail">{{model.candidat.nom}}</h6>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                            <p>Email: <strong>{{model.candidat.email}}</strong></p>
+                            <p>Phone: <strong>{{model.candidat.phone}}</strong> </p>
+                            <p>Adresse: <strong>{{model.candidat.adresse}}</strong> </p>
+                            <p>profession: <strong>{{model.candidat.profession}}</strong> </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Date Naissance: <strong>{{model.candidat.date_naissance | date:'d/m/Y'}}</strong> </p>
+                        <p>Statut: <strong>
+                            {% if model.status == 1 %}
+                                En Attene
+                            {% elif model.status == 2 %}
+                                Accepté
+                            {% elif model.status == 3 %}
+                                Décliné
+                            {% endif %}</strong>
+                        </p>
+                    </div>
+                </div>
+                <h6 class="">OFFRE : {{model.offre.titre}}</h6>
+                <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="code" class="control-label">Date Publication :</label>
+                            <p>{{model.offre.datepublish| date:'d/m/Y'}}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="categorie" class="control-label">Localisation :</label>
+                            <p>{{model.offre.localisation}}</p>
+                        </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Type Contrat :</label>
+                        <p>{{model.offre.typecontrat}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="categorie" class="control-label">Date Close :</label>
+                        <p>{{model.offre.dateclose| date:'d/m/Y'}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+    var ref = {{model.id}};
+
+
+    function validation(){
+        status = 2
+        Traitement(ref, status);
+        // sendEmail(destination);
+    }
+
+    function decline() {
+        status = 3
+        Traitement(ref, status);
+        // notification();
+    }
+
+    function Traitement(ref,statut){
+        $.get(
+            "{% url  'app_recrutement_traite_candidature_json' %}",
+            {ref : ref, statut:statut},
+            function(data)
+            {
+                console.log("JSON STATUS" + JSON.stringify(data))
+                window.location.href = '{% url 'app_recrutement_detail_candidature' model.id %}';
+
+            },
+            "json"
+        );
+    }
+
+    function sendEmail(destinateur) {
+			Email.send({
+				Host: "smtp.gmail.com",
+				Username : "mercinsfcompte@gmail.com",
+				Password : "",
+				To : destinateur,
+				From : "mercinsfcompte@gmail.com",
+				Subject : "Test Envoi Mail",
+				Body : "Hello Cher Candidat, votre offre a bien été retenu",
+			})
+			.then(function(message){
+				alert("mail sent successfully");
+			});
+		}
+</script>
+{% endblock %}

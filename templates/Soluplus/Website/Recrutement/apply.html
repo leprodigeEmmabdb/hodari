@@ -1,0 +1,769 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'FrontRecrutment/job_space/img/fav.png' %}">
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>{{title}}</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/linearicons.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/upload.css' %}">
+        <link rel="stylesheet" href="{% static 'css/intlTelInput.css' %}">
+    </head>
+    <body>
+
+          <header id="header" id="home">
+            <div class="container">
+                <div class="row align-items-center justify-content-between d-flex">
+                  <div id="logo">
+                    <a href="https://hodari.cd/"><img src="{% static 'FrontRecrutment/job_space/img/logo (1).png' %}" width="50" alt="" title="" /></a>
+                  </div>
+                  <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="https://hodari.cd/">Accueil</a></li>
+                        <li><a href="https://hodari.cd/about.html">A propos</a></li>
+                        <li><a href="https://hodari.cd/valeur.html">Nos valeurs</a></li>
+                        <li><a href="https://hodari.cd/mission.html">Mission</a></li>
+                        <li><a href="https://hodari.cd/contact">Contact</a></li>
+                      </ul>
+                  </nav><!-- #nav-menu-container -->
+                </div>
+            </div>
+          </header><!-- #header -->
+
+
+        <!-- start banner Area -->
+        <section class="banner-area relative" id="home">
+            <div class="overlay overlay-bg"></div>
+            <div class="container">
+                <div class="row d-flex align-items-center justify-content-center">
+                    <div class="about-content col-lg-12">
+                        <h1 class="text-white">
+                            Candidats
+                        </h1>
+                        <p class="text-white link-nav"><a href="single.html">  inscrivez-vous en 1 minute !</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->
+
+        <!-- Start post Area -->
+        <section class="post-area section-gap">
+            <div class="container">
+                {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-8 post-list">
+                        <h3 class="mb-30">Vos Informations</h3>
+                        <form action="{% url 'website_post_apply_offre' %}" novalidate method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <input type="text" name="idoffre" id="idoffre" value="{{model.id}}" required style="display:none;">
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="nom" placeholder="Nom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom'" required class="single-input">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="postnom" placeholder="PostNom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PostNom'" required class="single-input">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="prenom" placeholder="Prenom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Prenom'" required class="single-input">
+                            </div>
+                            
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                <input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" required class="single-input">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <input type="tel" name="tel" id="phone" placeholder="Téléphone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone'" required class="single-input phonecd">
+                            </div>
+
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                                <select id="domaine_id" required class="single-input form-control" style="height:40px" onChange="select_domaine_activite()">
+                                    <option value="">Veuillez séléctionner un domaine d'activité</option>
+
+                                    {% for i in domaines_activite %}
+                                        <option value="{{i.id}}"> {{i.designation}} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                <select id="profession_id" name="profession_id" class="single-input form-control" style="height:40px" required>
+                                    <option value="">Veuillez séléctionner une profession</option>
+                                </select>
+                            </div>
+                            <br> <br>
+                            <div class="d-flex justify-content-center">
+                                <p style="text-align: center;font-size:17px;font-weight:800;">
+                                    JOIGNEZ VOTRE CV, LETTRE DE MOTIVATION, AINSI QUE LES DIFFERENTS DIPLOMES</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Upload  -->
+                                    <div id="file-upload-form" class="uploader">
+                                        <input id="file-upload" type="file" name="fileUpload" required/>
+
+                                        <label for="file-upload" id="file-drag">
+                                            <img id="file-image" src="#" alt="Preview" class="hidden">
+                                            <div id="start">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            <div>Select a CV or drag here</div>
+                                            <div id="notimage" class="hidden">Please select an image</div>
+                                            <span id="file-upload-btn" class="btn btn-primary">Select a CV</span>
+                                            </div>
+                                            <div id="response" class="hidden">
+                                            <div id="messages"></div>
+                                            <progress class="progress" id="file-progress" value="0">
+                                                <span>0</span>%
+                                            </progress>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                 <div class="col-md-6">
+                                        <!-- Upload  -->
+                                        <div id="file-upload-form2" class="uploader">
+                                            <input id="file-upload2" type="file" name="fileUpload2" required/>
+
+                                            <label for="file-upload2" id="file-drag2">
+                                                <img id="file-image2" src="#" alt="Preview" class="hidden">
+                                                <div id="start2">
+                                                    <i class="fa fa-download" aria-hidden="true"></i>
+                                                    <div>Select a Motivation or drag here</div>
+                                                    <div id="notimage2" class="hidden">Please select an image</div>
+                                                    <span id="file-upload-btn2" class="btn btn-primary">Select a Motivation</span>
+                                                </div>
+                                                <div id="response2" class="hidden">
+                                                <div id="messages2"></div>
+                                                    <progress class="progress" id="file-progress2" value="0">
+                                                        <span>0</span>%
+                                                    </progress>
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                            </div>
+                            <br><br>
+                            <div class="card">
+                                <div class="card-header">
+                                    <p style="text-align:left;font-size:17px;font-weight:800;">DIPLOMES</p>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-responsive">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col" width="10%">#</th>
+                                            <th scope="col" width="80%">Diplomes</th>
+                                            <th scope="col" width="10%"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="items">
+                                          <tr id="ligne1">
+                                            <th scope="row">1</th>
+                                            <td>
+                                                <input type="file" name="diplome" id="diplome1" required/>
+                                            </td>
+                                            <td align="center">
+                                                <i class="fa fa-trash text-danger delete" onclick="supprimerLigne(1)"></i>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+
+                                      <br>
+                                      <section class="button-area">
+                                        <div class="button-group-area mt-10">
+                                            <a id="btnAjouterLigne" class="genric-btn default-border">Ajouter un diplome</a>
+                                        </div>
+                                      </section>
+                                </div>
+                            </div>
+                            <br> <br> <br>
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-1 col-lg-11">
+                                    <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 sidebar">
+                        <div class="single-slidebar">
+                            <h4>Emploi Par ville</h4>
+                            <ul class="cat-list">
+                                <li><a class="justify-content-between d-flex"><p>Kinshasa</p><span>{{ville.kin}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Lubumbashi</p><span>{{ville.lushi}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Goma</p><span>{{ville.goma}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Matadi</p><span>{{ville.matadi}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Kisangani</p><span>{{ville.kisang}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Lualaba</p><span>{{ville.lualaba}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Bukavu</p><span>{{ville.bukavu}}</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="single-slidebar">
+                            <h4>Recentes Publications</h4>
+                            <div class="active-relatedjob-carusel">
+                                {% for item in recente %}
+                                <div class="single-rated">
+                                    <img class="img-fluid" src="{% static 'FrontRecrutment/job_space/img/work.png' %}" alt="">
+                                    <a href="{% url 'website_item_offre' item.id %}"><h4>{{item.titre}}</h4></a>
+                                    <h6>Publié: {{item.datepublish| date:'d/m/Y'}}</h6>
+                                    <p class="limiteDescrib">
+                                        {{item.description}}
+                                    </p>
+                                    <h5>Entreprise:{{item.entreprise}}</h5>
+                                    <p><span class="lnr lnr-map"></span> Lieu: {{item.localisation}}</p>
+                                    <p class="address"><span class="lnr lnr-pushpin"></span> Contrat: {{item.typecontrat}}</p>
+                                    <p class="address"><span class="lnr lnr-calendar-full"></span> Fin: {{item.dateclose| date:'d/m/Y'}}</p>
+                                    <a href="{% url 'website_item_offre' item.id %}" class="btns text-uppercase">Voir Plus</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- <div class="single-slidebar">
+                            <h4>Jobs by Category</h4>
+                            <ul class="footer-nav">
+                                <li class="menu-active"><a href="https://hodari.cd/">Accueil</a></li>
+                                <li><a href="https://hodari.cd/about.html">A propos</a></li>
+                                <li><a href="https://hodari.cd/valeur.html">Nos valeurs</a></li>
+                                <li><a href="https://hodari.cd/mission.html">Mission</a></li>
+                                <li><a href="https://hodari.cd/contact">Contact</a></li>
+                            </ul>
+                        </div> -->
+
+                        <!-- <div class="single-slidebar">
+                            <h4>Carrer Advice Blog</h4>
+                            <div class="blog-list">
+                                <div class="single-blog " style="background:#000 url(img/blog1.jpg);">
+                                    <a href="single.html"><h4>Home Audio Recording <br>
+                                    For Everyone</h4></a>
+                                    <div class="meta justify-content-between d-flex">
+                                        <p>
+                                            02 Hours ago
+                                        </p>
+                                        <p>
+                                            <span class="lnr lnr-heart"></span>
+                                            06
+                                             <span class="lnr lnr-bubble"></span>
+                                            02
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="single-blog " style="background:#000 url(img/blog2.jpg);">
+                                    <a href="single.html"><h4>Home Audio Recording <br>
+                                    For Everyone</h4></a>
+                                    <div class="meta justify-content-between d-flex">
+                                        <p>
+                                            02 Hours ago
+                                        </p>
+                                        <p>
+                                            <span class="lnr lnr-heart"></span>
+                                            06
+                                             <span class="lnr lnr-bubble"></span>
+                                            02
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="single-blog " style="background:#000 url(img/blog1.jpg);">
+                                    <a href="single.html"><h4>Home Audio Recording <br>
+                                    For Everyone</h4></a>
+                                    <div class="meta justify-content-between d-flex">
+                                        <p>
+                                            02 Hours ago
+                                        </p>
+                                        <p>
+                                            <span class="lnr lnr-heart"></span>
+                                            06
+                                             <span class="lnr lnr-bubble"></span>
+                                            02
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End post Area -->
+
+        <!-- start footer Area -->
+        <footer class="footer-area section-gap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3  col-md-12">
+                        <div class="single-footer-widget">
+                            <h6>Lien Rapide</h6>
+                            <ul class="footer-nav">
+                                <li class="menu-active"><a href="https://hodari.cd/">Accueil</a></li>
+                                <li><a href="https://hodari.cd/about.html">A propos</a></li>
+                                <li><a href="https://hodari.cd/valeur.html">Nos valeurs</a></li>
+                                <li><a href="https://hodari.cd/mission.html">Mission</a></li>
+                                <li><a href="https://hodari.cd/contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6  col-md-12">
+                        <div class="single-footer-widget newsletter">
+                            <h6>Newsletter</h6>
+                            <p>S'inscrire à notre newsletter pour recevoir des nouvelles offres.</p>
+                            <div id="mc_embed_signup">
+                                <form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+
+                                    <div class="form-group row" style="width: 100%">
+                                        <div class="col-lg-8 col-md-12">
+                                            <input name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '" required="" type="email">
+                                            <div style="position: absolute; left: -5000px;">
+                                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12">
+                                            <button class="nw-btn primary-btn">Subscribe<span class="lnr lnr-arrow-right"></span></button>
+                                        </div>
+                                    </div>
+                                    <div class="info"></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3  col-md-12">
+                        <h6>Reseaux Sociaux</h6>
+                        <div class="footer-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-dribbble"></i></a>
+                            <a href="#"><i class="fa fa-behance"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row footer-bottom d-flex justify-content-between">
+                    <p class="col-lg-12 col-sm-12 footer-text m-0 text-white" style="text-align: center;">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is made by <a href="#" target="_blank">SoluPlus</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </footer>
+        <!-- End footer Area -->
+
+        <script src="{% static 'FrontRecrutment/job_space/js/vendor/jquery-2.2.4.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/vendor/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+          <script src="{% static 'FrontRecrutment/job_space/js/easing.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/hoverIntent.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/superfish.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/parallax.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/mail-script.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/main.js' %}"></script>
+        <script src="{% static 'js/intlTelInput.js' %}"></script>
+        <script>
+            var input = document.querySelector("#phone");
+            window.intlTelInput(input, {
+            dropdownContainer: document.body,
+            nationalMode: true,
+            preferredCountries: ['cd'],
+            separateDialCode: true,
+            utilsScript: "{% static 'js/utils.js' %}",
+            });
+        </script>
+        <script>
+            // File Upload
+            //
+            function ekUpload(){
+            function Init() {
+
+                console.log("Upload Initialised");
+
+                var fileSelect    = document.getElementById('file-upload'),
+                    fileDrag      = document.getElementById('file-drag'),
+                    submitButton  = document.getElementById('submit-button');
+
+                fileSelect.addEventListener('change', fileSelectHandler, false);
+
+                // Is XHR2 available?
+                var xhr = new XMLHttpRequest();
+                if (xhr.upload) {
+                // File Drop
+                    fileDrag.addEventListener('dragover', fileDragHover, false);
+                    fileDrag.addEventListener('dragleave', fileDragHover, false);
+                    fileDrag.addEventListener('drop', fileSelectHandler, false);
+                }
+            }
+
+            function fileDragHover(e) {
+                var fileDrag = document.getElementById('file-drag');
+
+                e.stopPropagation();
+                e.preventDefault();
+
+                fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+            }
+
+            function fileSelectHandler(e) {
+                // Fetch FileList object
+                var files = e.target.files || e.dataTransfer.files;
+
+                // Cancel event and hover styling
+                fileDragHover(e);
+
+                // Process all File objects
+                for (var i = 0, f; f = files[i]; i++) {
+                    parseFile(f);
+                    uploadFile(f);
+                }
+            }
+
+            // Output
+            function output(msg) {
+                // Response
+                var m = document.getElementById('messages');
+                m.innerHTML = msg;
+            }
+
+            function parseFile(file) {
+
+                console.log(file.name);
+                output(
+                    '<strong>' + encodeURI(file.name) + '</strong>'
+                );
+
+                // var fileType = file.type;
+                // console.log(fileType);
+                var imageName = file.name;
+
+                var isGood = (/\.(?=gif|jpg|png|jpeg|pdf|txt|docx)/gi).test(imageName);
+                if (isGood) {
+                    document.getElementById('start').classList.add("hidden");
+                    document.getElementById('response').classList.remove("hidden");
+                    document.getElementById('notimage').classList.add("hidden");
+                    // Thumbnail Preview
+                    document.getElementById('file-image').classList.remove("hidden");
+                    document.getElementById('file-image').src = URL.createObjectURL(file);
+                }
+                else {
+                    document.getElementById('file-image').classList.add("hidden");
+                    document.getElementById('notimage').classList.remove("hidden");
+                    document.getElementById('start').classList.remove("hidden");
+                    document.getElementById('response').classList.add("hidden");
+                    document.getElementById("file-upload-form").reset();
+                }
+            }
+
+            function setProgressMaxValue(e) {
+                var pBar = document.getElementById('file-progress');
+
+                if (e.lengthComputable) {
+                pBar.max = e.total;
+                }
+            }
+
+            function updateFileProgress(e) {
+                var pBar = document.getElementById('file-progress');
+
+                if (e.lengthComputable) {
+                pBar.value = e.loaded;
+                }
+            }
+
+            function uploadFile(file) {
+
+                var xhr = new XMLHttpRequest(),
+                fileInput = document.getElementById('class-roster-file'),
+                pBar = document.getElementById('file-progress'),
+                fileSizeLimit = 1024; // In MB
+                if (xhr.upload) {
+                // Check if file is less than x MB
+                if (file.size <= fileSizeLimit * 1024 * 1024) {
+                    // Progress bar
+                    pBar.style.display = 'inline';
+                    xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
+                    xhr.upload.addEventListener('progress', updateFileProgress, false);
+
+                    // File received / failed
+                    xhr.onreadystatechange = function(e) {
+                    if (xhr.readyState == 4) {
+                        // Everything is good!
+
+                        // progress.className = (xhr.status == 200 ? "success" : "failure");
+                        // document.location.reload(true);
+                    }
+                    };
+
+                    // Start upload
+                    xhr.open('POST', document.getElementById('file-upload-form').action, true);
+                    xhr.setRequestHeader('X-File-Name', file.name);
+                    xhr.setRequestHeader('X-File-Size', file.size);
+                    xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                    xhr.send(file);
+                } else {
+                    output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+                }
+                }
+            }
+
+            // Check for the various File API support.
+            if (window.File && window.FileList && window.FileReader) {
+                Init();
+            } else {
+                document.getElementById('file-drag').style.display = 'none';
+            }
+            }
+            ekUpload();
+        </script>
+
+    <script>
+            // File Upload
+            //
+            function ekUpload(){
+                function Init() {
+
+                    console.log("Upload Initialised");
+
+                    var fileSelect    = document.getElementById('file-upload2'),
+                        fileDrag      = document.getElementById('file-drag2'),
+                        submitButton  = document.getElementById('submit-button');
+
+                    fileSelect.addEventListener('change', fileSelectHandler, false);
+
+                    // Is XHR2 available?
+                    var xhr = new XMLHttpRequest();
+                    if (xhr.upload) {
+                    // File Drop
+                        fileDrag.addEventListener('dragover', fileDragHover, false);
+                        fileDrag.addEventListener('dragleave', fileDragHover, false);
+                        fileDrag.addEventListener('drop', fileSelectHandler, false);
+                    }
+                }
+
+                function fileDragHover(e) {
+                    var fileDrag = document.getElementById('file-drag2');
+
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    fileDrag.className = (e.type === 'dragover' ? 'hover' : 'modal-body file-upload');
+                }
+
+                function fileSelectHandler(e) {
+                    // Fetch FileList object
+                    var files = e.target.files || e.dataTransfer.files;
+
+                    // Cancel event and hover styling
+                    fileDragHover(e);
+
+                    // Process all File objects
+                    for (var i = 0, f; f = files[i]; i++) {
+                        parseFile(f);
+                        uploadFile(f);
+                    }
+                }
+
+            // Output
+                function output(msg) {
+                    // Response
+                    var m = document.getElementById('messages2');
+                    m.innerHTML = msg;
+                }
+
+                function parseFile(file) {
+
+                    console.log(file.name);
+                    output(
+                    '<strong>' + encodeURI(file.name) + '</strong>'
+                    );
+
+                    // var fileType = file.type;
+                    // console.log(fileType);
+                    var imageName = file.name;
+
+                    var isGood = (/\.(?=gif|jpg|png|jpeg|pdf|txt|docx)/gi).test(imageName);
+                    if (isGood) {
+                        document.getElementById('start2').classList.add("hidden");
+                        document.getElementById('response2').classList.remove("hidden");
+                        document.getElementById('notimage2').classList.add("hidden");
+                        // Thumbnail Preview
+                        document.getElementById('file-image2').classList.remove("hidden");
+                        document.getElementById('file-image2').src = URL.createObjectURL(file);
+                    }
+                    else {
+                        document.getElementById('file-image2').classList.add("hidden");
+                        document.getElementById('notimage2').classList.remove("hidden");
+                        document.getElementById('start2').classList.remove("hidden");
+                        document.getElementById('response2').classList.add("hidden");
+                        document.getElementById("file-upload-form2").reset();
+                    }
+                }
+
+                function setProgressMaxValue(e) {
+                    var pBar = document.getElementById('file-progress2');
+
+                    if (e.lengthComputable) {
+                        pBar.max = e.total;
+                    }
+                }
+
+                function updateFileProgress(e) {
+                    var pBar = document.getElementById('file-progress2');
+
+                    if (e.lengthComputable) {
+                        pBar.value = e.loaded;
+                    }
+                }
+
+                function uploadFile(file) {
+
+                    var xhr = new XMLHttpRequest(),
+                    fileInput = document.getElementById('class-roster-file'),
+                    pBar = document.getElementById('file-progress2'),
+                    fileSizeLimit = 1024; // In MB
+                    if (xhr.upload) {
+                    // Check if file is less than x MB
+                    if (file.size <= fileSizeLimit * 1024 * 1024) {
+                        // Progress bar
+                        pBar.style.display = 'inline';
+                        xhr.upload.addEventListener('loadstart', setProgressMaxValue, false);
+                        xhr.upload.addEventListener('progress', updateFileProgress, false);
+
+                        // File received / failed
+                        xhr.onreadystatechange = function(e) {
+                            if (xhr.readyState == 4) {
+                                // Everything is good!
+
+                                // progress.className = (xhr.status == 200 ? "success" : "failure");
+                                // document.location.reload(true);
+                            }
+                        };
+
+                        // Start upload
+                        xhr.open('POST', document.getElementById('file-upload-form').action, true);
+                        xhr.setRequestHeader('X-File-Name', file.name);
+                        xhr.setRequestHeader('X-File-Size', file.size);
+                        xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+                        xhr.send(file);
+                    } else {
+                        output('Please upload a smaller file (< ' + fileSizeLimit + ' MB).');
+                    }
+                    }
+                }
+
+                // Check for the various File API support.
+                if (window.File && window.FileList && window.FileReader) {
+                    Init();
+                } else {
+                    document.getElementById('file-drag').style.display = 'none';
+                }
+            }
+            ekUpload();
+    </script>
+    <script>
+        var nombreLignes = 1;
+        var compteur = 1;
+
+         $("#btnAjouterLigne").on("click", function () {
+             nombreLignes++;
+             compteur++;
+             var nouvelleLigne = '<tr id="ligne' + compteur + '"><th scope="row">' + compteur + '</th><td>';
+                 nouvelleLigne += '<input type="file" name="diplome" id="designation'+ compteur +'" required/></td>';
+                 nouvelleLigne += '<td align="center">';
+                 nouvelleLigne += '<i class="fa fa-trash text-danger delete" onclick="supprimerLigne(' + compteur + ')"></i>';
+                 nouvelleLigne += '</td></tr>'
+
+
+             $("#items").append(nouvelleLigne);
+        });
+
+
+        function supprimerLigne(indice) {
+             nombreLignes--;
+             $("#ligne" + indice).remove();
+         }
+     </script>
+
+     <script>
+        function select_domaine_activite(){
+            domaine_id = $("#domaine_id").val();
+            select_poste = $("#profession_id");
+            select_poste.find('option')
+            .remove()
+            .end()
+            .append('<option value="">Veuillez séléctionner une profession</option>');
+
+            $.get(
+                "{% url 'ajax_get_poste_recrutement' %}",
+                { 
+                    domaine_id : domaine_id,
+                },
+                function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        var result = response[i];
+                        
+                        tbody = '<option value = "'+ result.id +'" >' + result.designation + '</option>';
+                        select_poste.append(tbody);
+                    }
+                },
+                "json"
+            );
+        }
+        
+    </script>
+
+
+    </body>
+
+</html>
+
+
+

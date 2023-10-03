@@ -1,0 +1,80 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+<style>
+    .decor th{
+        color:#fff;
+    }
+</style>
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li class="active">Dashboard</li>
+            <li><a href="{% url 'app_recrutement_list_candidatures' %}">Liste Offres</a></li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button type="button" onclick="printTicket()" class="btn btn-inverse waves-effect waves-light m-b-5" style="margin-left: 7px;"><i class="fa fa-print"></i> <span>Imprimer</span></button>
+            </div>
+            <div id="GFG" class="panel-body">
+                <div style="text-align: center;">
+                    <h2>{{ title |upper}} VALIDEE</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table class="table table-striped table-bordered">
+                            <thead class="bg-success decor">
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Candidat</th>
+                                    <th>Email</th>
+                                    <th>Date Inscrite</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in model_accept %}
+                                <tr>
+                                    <td>{{item.reference}}</td>
+                                    <td>{{item.candidat.prenom}} - {{item.candidat.nom}}</td>
+                                    <td>{{item.candidat.email}}</td>
+                                    <td>{{item.dateinscrit|date:'d/m/Y'}}</td>
+                                    <td>
+                                        {% if item.status == 1 %}
+                                            En Attene
+                                        {% elif item.status == 2 %}
+                                            Accepté
+                                        {% elif item.status == 3 %}
+                                            Décliné
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+<script>
+
+    function printTicket() {
+        var height = document.getElementById("GFG").offsetHeight;
+        var printticket = document.getElementById("GFG").innerHTML;
+        document.body.innerHTML = printticket;
+        window.print();
+        document.body.innerHTML = restorePage;
+
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+/*@import url(http://fonts.googleapis.com/css?family=Nunito:400,300,700);*/
+@font-face {
+    font-family: 'Glyphicons Halflings';
+  
+    src: url('fonts/glyphicons-halflings-regular.eot');
+    src: url('fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  }
+
+@font-face {
+    font-family: Gentium,'Nunito', sans-serif;
+    src: url(http://example.com/fonts/Gentium.otf);
+}
+
+h1 { font-family: Gentium }
+
+body { 
+    font-family: Gentium, sans-serif, serif !important ;
+    font-size: small;    
+}
+
+@page {
+    size: landscape;
+    margin: 0.5cm 0.5cm 0.5cm 0.5cm;
+    font-family: Gentium !important;
+    ;
+    @bottom-right {
+        content: "Page " counter(page) " sur " counter(pages);
+        padding-bottom: 10px;
+    }
+}
+
+@page :first {
+    @bottom-right {
+        content: "Page " counter(page) " sur " counter(pages);
+        padding-bottom: 10px;
+    }
+}
+
+@page :last {
+    @bottom-right {
+        content: "Page " counter(page) " sur " counter(pages);
+        padding-bottom: 10px;
+    }
+}
+
+footer {
+    position: fixed;
+    bottom: -2.5cm;
+    width: 100%;
+    text-align: center;
+    font-size: 10pt;
+}
+footer img {
+    height: 1.5cm;  
+}
+
+
+table {
+border-collapse:collapse;
+width:100%;
+
+}
+th, td {
+border:1px solid black;
+width:fit-content;
+padding-top:1px;
+padding-bottom: 1px;
+}
+td {
+text-align:center;
+padding-top: 1px;
+padding-bottom: 1px;
+}
+caption {
+font-weight:bold
+}
+

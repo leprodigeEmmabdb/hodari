@@ -1,0 +1,86 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="{% url 'app_courrier_add_exped' %}" class="btn btn-inverse waves-effect waves-light m-b-5"> <i class="fa fa-plus"></i> <span>Créer</span> </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover table-responsive" id="liste">
+                            <thead>
+                                <tr>
+                                
+                                <th>
+                                    NOM COMPLET
+                                </th>
+                                <th>
+                                    TELEPHONE
+                                </th>
+                                <th>
+                                    EMAIL
+                                </th>
+                
+                                </th>
+                                <th>
+                                    ADRESSE
+                                </th>
+                
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in model %}
+                                <tr>
+                                
+                                <td>
+                                <a  href="{% url 'app_courrier_details_exped' item.id %}">{{item.nom}} {{item.postnom}} {{item.prenom}}</a>
+                                </td>
+                                <td>
+                                    {{item.phone}}
+                                </td>
+                                <td>
+                                    {{item.email}}
+                                </td>
+                
+                                <td>
+                                    {{item.adresse_complete}}
+                                </td>
+                            
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}            
+
+
+        
+    

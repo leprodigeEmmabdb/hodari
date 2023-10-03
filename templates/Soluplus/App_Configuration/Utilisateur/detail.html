@@ -1,0 +1,154 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+            <div class="panel-heading">
+                
+                
+            </div>
+            <div class="panel-body">
+                
+                <br><br>
+                <div class="row" style="padding: 50px;">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="date_requete" >Nom complet :</label>
+                                <h5>{{model.nom}}</h5>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="caisse_dest" >Adresse :</label>
+                                <h5>{{model.adresse}}</h5>
+                            </div>
+                    
+                            <!--div class="col-md-6">
+                                <label for="type_requete" >Postnom</label>
+                                <h5>{{model.postnom}}</h5>
+                            </div-->          
+                        </div>
+                        
+                        <!--div class="row row_detail">
+                            
+                            <div class="col-md-6">
+                                <label for="caisse_prov" >Prenom</label>
+                                <h5>{{model.prenom}}</h5>
+                            </div> 
+    
+                            
+                        </div-->
+    
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="montant" >Email :</label>
+                                <h5>{{model.email}}</h5>
+                            </div> 
+    
+                            <div class="col-md-6">
+                                <label for="devise" >Téléphone :</label>
+                                <h5>{{model.phone}}</h5>
+                            </div> 
+                        </div>
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="montant" >Nom d'utilisateur :</label>
+                                <h5>{{model.user.username}}</h5>
+                            </div> 
+                            
+                            <div class="col-md-6">
+                                <label for="montant" >Profil :</label>
+                                <h5>{{model.profil.designation}}</h5>
+                            </div> 
+                            
+                        </div>
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                {% if model.est_caissier == True %}
+                                    <label for="montant" >Point de vente :</label>
+                                    <h5>{{model.pos.designation}}</h5>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                        
+                        {% if model.profil.est_profil_caisse == True %}
+                            <div class="col-md-6">
+                                <div class="panel panel-color panel-danger">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Point de vente attribuée :</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        
+                                        <br>
+                                        
+                                        <form class="needs-validation" novalidate method="POST" id="form" action="{% url 'post_add_pos_user' %}">
+                                            {% csrf_token %}
+                                            
+                                            <!-- Appel de la fonction message -->
+                                            {% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}        
+                                            
+                                            <input type="hidden" value="{{model.id}}" name="user_id">
+
+                                            <div class="row row_formulaire">
+                                                <div class="col-md-12">
+                                                    <label for="designation" class="control-label col-lg-4">Point de vente</label>
+                                                    <select name="pos_id" id="" class="form-control" required>
+                                                        <option value="">Veuillez séléctionner un point de vente</option>
+                                                        
+                                                        {% for item in pos %}
+                                                            {% if item.id == model.pos.id %}
+                                                                <option value="{{item.id}}" selected>{{item.designation}} </option>
+                                                            {% else %}
+                                                                <option value="{{item.id}}">{{item.designation}} </option>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </select>
+                                                    <div class="invalid-tooltip">
+                                                        Veuillez remplir ce champs
+                                                    </div>
+                                                </div>
+                                                
+                                            </div> 
+                                            <br>
+                                            <div class="form-group">
+                                                <div class="col-lg-10">
+                                                    <button class="btn btn-success waves-effect waves-light" type="submit">Valider</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+</div> <!-- End Row -->
+
+
+{% endblock %}

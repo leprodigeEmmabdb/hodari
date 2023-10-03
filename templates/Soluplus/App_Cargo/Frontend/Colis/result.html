@@ -1,0 +1,161 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'front_index' %}">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+
+            <div id="panel_heading" class="panel-heading">
+            </div>
+            
+            <div class="panel-body">
+                <div id="loading_text" class="header text-center">
+                    <p class="commentaire" style="font-size: 14px;padding: 0px 5px;color: grey; font-family: 'Circular Std Book';"> Chargement ... </p>
+                </div>
+                <div id="error_text" class="header text-center">
+                    <i style="font-size: 128px; color: red;" class="glyphicon glyphicon-remove-circle"></i>
+                    <h1>Le numéro du colis scanné n'est pas valide</h1>
+                </div>
+                
+                <div id="success_text" class="header text-center">
+                    <i style="font-size: 100px; color: green;" class="glyphicon glyphicon-ok-circle"></i>
+                </div><br>
+                <div id="formulaire">
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="numero" class="control-label">Numéro :</label>
+                            <h2 id="numero"></h2>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="client" class="control-label">Client :</label>
+                            <h2 id="client"></h2>
+                        </div>
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="type" class="control-label">Type :</label>
+                            <h2 id="type"></h2>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="etat" class="control-label">Etat :</label>
+                            <h2 id="etat"></h2>
+                        </div>
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="poids" class="control-label">Poids :</label>
+                            <h2 id="poids"></h2>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="montant" class="control-label">Montant :</label>
+                            <h2 id="montant"></h2>
+                        </div>
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="provenance" class="control-label">Provenance :</label>
+                            <h2 id="provenance"></h2>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="destination" class="control-label">Destination :</label>
+                            <h2 id="destination"></h2>
+                        </div>
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="recepteur" class="control-label">Recepteur :</label>
+                            <h2 id="recepteur"></h2>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="auteur" class="control-label">Auteur :</label>
+                            <h2 id="auteur"></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+<script>
+    var type_scan = JSBridge.getTypeScan();
+    var result_scan = JSBridge.getResultScan();
+
+    var url_home = "{% url 'front_index' %}";
+    var btn_retour = '<a id="btn_retour" href="'+url_home+'" class="btn btn-default waves-effect waves-light m-b-5"> <span>Retour</span> </a>';
+
+    $("#panel_heading").hide();
+    $("#loading_text").show();
+    $("#error_text").hide();
+    $("#success_text").hide();
+    $("#formulaire").hide();
+    if (type_scan == "colis"){
+        $.get(
+            "{% url 'json_detail_colis' %}", { ref: result_scan},
+            function(response) {
+                console.log(response);
+                $("#loading_text").hide();
+                $("#panel_heading").show();
+
+                if(response != null){
+                    $("#success_text").show();
+                    var url_receptionner = "{% url 'front_arrive_colis' 12345 %}".replace("12345", response.id);
+                    var url_livrer = "{% url 'front_add_livraison' 12345 %}".replace("12345", response.id);
+                    var btn_livrer = '<a id="btn_livrer" href="'+url_livrer+'" class="btn btn-success waves-effect waves-light m-b-5"> <span>Livrer</span> </a>';
+                    var btn_reception = '<a id="btn_receptionner" href="'+url_receptionner+'" class="btn btn-success waves-effect waves-light m-b-5"> <span>Réceptionner</span> </a>';
+
+                    if(response.etat_id == 5){
+                        $("#panel_heading").append(btn_livrer);
+                        $("#panel_heading").append(btn_retour);
+                    }else if(response.etat_id == 3){
+                        $("#panel_heading").append(btn_reception);
+                        $("#panel_heading").append(btn_retour);
+                    }else{
+                        $("#panel_heading").append(btn_retour);
+                    }
+
+                    $("#formulaire").show();
+
+                    $("#numero").text(response.numero);
+                    $("#client").text(response.client);
+                    $("#type").text(response.type);
+                    $("#etat").text(response.etat);
+                    $("#poids").text(response.poids + " " + response.unite);
+                    $("#montant").text(response.montant);
+                    $("#provenance").text(response.provenance);
+                    $("#recepteur").text(response.recepteur);
+                    $("#destination").text(response.destination);
+                    $("#auteur").text(response.auteur);
+                }else{
+                    $("#error_text").show();
+
+                    $("#btn_livrer").hide();
+                    $("#btn_reception").hide();
+                    $("#btn_retour").show();
+                }        
+            },
+            "json"
+        );
+    }
+</script>
+{% endblock %}

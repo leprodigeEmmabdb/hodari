@@ -1,0 +1,114 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'app_recrutement_list_offre_admin' %}">Accueil</a></li>
+            <li class="active"><a href="{% url 'app_tableau_recrutement' %}"></a> Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-danger">
+            <div class="panel-heading" style="color: white;">
+               <!-- {{model.reference}} -->
+               <a href="{% url 'app_recrutement_update_offre_admin' model.id %}" class="btn btn-inverse waves-effect waves-light m-b-5"> <i class="fa fa-pencil"></i>
+                    <span>Modifier  </span>
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <h3 class="affiche_detail">{{model.titre}}</h3>
+                    </div>
+                </div>
+                <hr>
+                <div class="row row_formulaire">
+                    <div class="col-md-12">
+                        <label for="code" class="control-label">Description :</label>
+                        <p>{{model.description}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Date Publication :</label>
+                        <p>{{model.datepublish| date:'d/m/Y'}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="categorie" class="control-label">Localisation :</label>
+                        <p>{{model.localisation}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Type Contrat :</label>
+                        <p>{{model.typecontrat}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="categorie" class="control-label">Date Close :</label>
+                        <p>{{model.dateclose| date:'d/m/Y'}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Entreprise :</label>
+                        <p>{{model.entreprise}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="categorie" class="control-label">Responsable :</label>
+                        <p>{{model.responsable}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-12">
+                        <label for="code" class="control-label">Qualification :</label>
+                        <p>{{model.qualification}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-12">
+                        <label for="code" class="control-label">Proccess :</label>
+                        <p>{{model.proccess}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-12">
+                        <label for="code" class="control-label">Tache :</label>
+                        <p>{{model.tache}}</p>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Status :</label>
+                        <p>
+                            {% if model.status == 1 %}
+                                en cours
+                            {% elif model.status == 2 %}
+                                cloturée
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="code" class="control-label">Actif :</label>
+                        <p>{{model.est_actif}}</p>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+
+{% endblock %}

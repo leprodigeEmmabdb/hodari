@@ -1,0 +1,176 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+  
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}  
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-body" style="padding: 40px;">
+                <form  class="needs-validation" novalidate  method="POST"  action="{% url 'app_courrier_rapport_recu' %}">
+                    {% csrf_token %}
+
+                    <input id="submit" type="submit" style="display: none">                    
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-4">
+                            <label for="date_debut" >Date debut</label>
+                            <div class="input-group">
+                                <input name="date_debut" type="text" class="form-control" placeholder="mm/dd/yyyy" id="date_debut" required >
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label for="date_fin" >Date fin</label>
+                            <div class="input-group">
+                                <input name="date_fin" type="text" class="form-control" placeholder="mm/dd/yyyy" id="date_fin" required >
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="date_filtre" >Date à filtrer</label>
+                            <select class="form-control" name="date_filtre" id="">
+                                <option value="1">Date enregistrement</option>
+                                <option value="2">Date réception</option>
+                                <option value="3">Date echéance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-4">
+                            <label for="nature_id" >Nature</label>
+                            <select class="form-control" name="nature_id" id="">
+                                <option value="0">---</option>
+                                {% for item in natures %}
+                                    <option value="{{item.id}}"> {{item.designation}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="expediteur_id" >Expéditeur</label>
+                            <select class="form-control" name="expediteur_id" id="">
+                                <option value="0">---</option>
+                                {% for item in expediteurs %}
+                                    <option value="{{item.id}}"> {{item.nom_complet}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="destinataire_id" >Destinataire</label>
+                            <select class="form-control" name="destinataire_id" id="">
+                                <option value="0">---</option>
+                                {% for item in destinataires %}
+                                    <option value="{{item.id}}"> {{item.nom_complet}} </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr>
+                    
+                    <div class="row row_formulaire">
+                        <div class="col-md-4">
+                            <label for="numero_filtre" >Numero</label>
+                            <select class="form-control" name="numero_filtre" id="">
+                                <option value="1">N° envoi</option>
+                                <option value="2">N° enregistrement</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="numero" >Numéro</label>
+                            <input type="text" name="numero" class="form-control" autocomplete="off">
+                        </div>
+                        
+                    </div>
+
+                    <br> <br> 
+                    
+                    <div class="form-group">
+                        <div class=" col-lg-11">
+                            <button class="btn btn-success waves-effect waves-light" type="button" onclick="submitForm()" >Voir filtre</button>
+                            
+                        </div>
+                    </div>
+                </form>
+                
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+</div> <!-- End row -->
+
+<script>
+    
+    $(document).ready(function(){ 
+
+        jQuery('#date_debut').datepicker();
+        jQuery('#date_fin').datepicker();
+
+        $("#categorie_inventorie").hide();
+        $("#article_inventorie").hide();
+
+        $("input[name='inventaire_de']").change(function(){
+            if($(this).val() == '0') {
+                $("#categorie_inventorie").hide();
+                $("#article_inventorie").hide();
+            } else if ($(this).val() == '1') {
+                $("#categorie_inventorie").show();
+                $("#article_inventorie").hide();
+                $("#article_id").val('');
+            }else if ($(this).val() == '2') {
+                $("#categorie_inventorie").hide();
+                $("#article_inventorie").show();
+                $("#categorie_id").val('');
+            }
+        });
+
+    });
+
+
+    function submitForm(){
+        if($("input[name='inventaire_de']:checked").val() == "2" && $("#article_id").val() == ""){
+            swal({
+                title: "Information",   
+                text: "Veuillez sélectionner un article",   
+                type: "warning",       
+                closeOnConfirm: true 
+            });
+            
+        } else if ($("input[name='inventaire_de']:checked").val() == "1" && $("#categorie_id").val() == ""){
+            swal({
+                title: "Information",   
+                text: "Veuillez sélectionner une catégorie",   
+                type: "warning",       
+                closeOnConfirm: true 
+            });
+        } else { 
+            document.getElementById('submit').click(); 
+        }
+    }
+
+</script>   
+
+{% endblock %}

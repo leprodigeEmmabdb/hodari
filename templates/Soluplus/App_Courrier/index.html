@@ -1,0 +1,103 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+
+<!-- Start Widget -->
+<div class="row">
+    <div class="col-md-3 col-sm-12">
+        <div class="mini-stat clearfix bx-shadow">
+            <span class="mini-stat-icon bg-info"><i class="ion-ios7-paperplane "></i></span>
+            <div class="mini-stat-info text-right text-muted">
+                <span class="">{{ total }}</span>
+                
+            </div>
+            <div class="tiles-progress">
+                <div class="m-t-20">
+                    <h5 class="text-uppercase">Total des courriers</h5>
+                    <div class="progress progress-sm m-0">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-12">
+        <div class="mini-stat clearfix bx-shadow">
+            <span class="mini-stat-icon bg-danger"><i class="ion-ios7-paperplane "></i></span>
+            <div class="mini-stat-info text-right text-muted">
+                <span class="">{{ traites }}</span>
+                
+            </div>
+            <div class="tiles-progress">
+                <div class="m-t-20">
+                    <h5 class="text-uppercase">Courriers traites</h5>
+                    <div class="progress progress-sm m-0">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 col-sm-12">
+        <div class="mini-stat clearfix bx-shadow">
+            <span class="mini-stat-icon bg-purple"><i class="ion-ios7-cart"></i></span>
+            <div class="mini-stat-info text-right text-muted">
+                <span class="">{{ instance }}</span>
+                
+            </div>
+            <div class="tiles-progress">
+                <div class="m-t-20">
+                    <h5 class="text-uppercase">Courriers en instance </h5>
+                    <div class="progress progress-sm m-0">
+                        <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3 col-sm-12">
+        <div class="mini-stat clearfix bx-shadow">
+            <span class="mini-stat-icon bg-purple"><i class="ion-ios7-cart"></i></span>
+            <div class="mini-stat-info text-right text-muted">
+                <span class="">{{ retard }}</span>
+                
+            </div>
+            <div class="tiles-progress">
+                <div class="m-t-20">
+                    <h5 class="text-uppercase">Courriers en retard </h5>
+                    <div class="progress progress-sm m-0">
+                        <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <span class="sr-only">100% Complete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+</div> 
+
+{% endblock %}

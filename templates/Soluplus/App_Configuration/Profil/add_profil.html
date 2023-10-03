@@ -1,0 +1,62 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+  
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            
+            <div class="panel-body">
+                <div class=" form">
+                    <form class="needs-validation" novalidate method="POST" id="form" action="{% url 'post_add_profil' %}">
+                        {% csrf_token %}
+
+                        <br>
+
+                        <!-- Appel de la fonction message -->
+                        {% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}        
+
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="designation" class="control-label col-lg-4">Designation</label>
+                                <input name="designation" id="" class=" form-control" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                            </div> 
+                        </div> 
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="est_caisse" class="control-label col-lg-4">Profil de caisse</label>
+                                <input name="est_caisse" id="" class="" type="checkbox">
+                            </div> 
+                        </div> 
+                        <br>
+                        <br> <br>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- .form -->
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+
+</div> <!-- End row -->
+
+
+
+{% endblock %}

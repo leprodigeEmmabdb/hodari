@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+<head>
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{% static 'Website/logo.png' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'Website/logo.png' %}" />
+    <!-- Author Meta -->
+    <meta name="author" content="codepixer">
+    <!-- Meta Description -->
+    <meta name="description" content="">
+    <!-- Meta Keyword -->
+    <meta name="keywords" content="">
+    <!-- meta character set -->
+    <meta charset="UTF-8">
+    <!-- Site Title -->
+    <title>{{title}}</title>
+
+    <!--link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"-->
+
+    <link href="https://fonts.cdnfonts.com/css/raleway-5" rel="stylesheet">
+                
+    
+        <!--
+        CSS
+        ============================================= -->
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/linearicons.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/magnific-popup.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/animate.min.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'FrontRecrutment/job_space/css/main.css' %}">
+
+        <link href="{% static 'Soluplus/css/homecards.css' %}" rel="stylesheet" type="text/css" />
+
+        <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+		<link rel="apple-touch-icon" href="{% static 'images/logo.png' %}">
+        
+        <style>
+            #titre_offre{
+                border: none;
+                width: 100%;
+                line-height: 0.5;
+                padding: 25px 20px 20px 0px;
+                float: left;
+                display: block;
+                color: black;
+                font-size: 20px;
+                text-transform: uppercase;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    <body>
+
+      {% include "Soluplus/Website/Utils/menu.html" %}
+
+        <!-- start banner Area -->
+        <section class="banner-area relative" id="home">
+            <div class="overlay overlay-bg"></div>
+            <div class="container">
+                <div class="row fullscreen d-flex align-items-center justify-content-center">
+                    <div class="banner-content col-lg-12">
+                        </br></br></br>
+                        <h1 class="text-white">
+                            Bienvenue dans les recrutements de Hodari.
+                        </h1>
+                        </br>
+                        <div class="row justify-content-center form-wrap">
+                            <div class="col-lg-1"></div>
+                            
+                            <div class="col-md-4">
+                                <a class="home-card"  href="{% url 'website_apply_depot' %}">
+                                  <div class="icon">
+                                    <center><img src="/static/Soluplus/images/icon/depot.png" alt="" /></center> 
+                                    
+                                  </div>
+                                  <div class="content">
+                                    <h1> Depot de CV </h1>
+                                  </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-1"></div>
+
+                            <div class="col-md-4">
+                                <!--a class="home-card" href="{% url 'website_list_offres' %}"-->
+                                <a class="home-card" href="#">
+                                  <div class="icon">
+                                    <img src="/static/Soluplus/images/icon/job.png" alt="" />
+                                  </div>
+                                  <div class="content">
+                                    <h1> Recherche d'offres </h1>
+                                    
+                                  </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-1"></div>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End banner Area -->
+
+
+      {% include "Soluplus/Website/Utils/footer.html" %}
+
+        
+
+        <script src="{% static 'FrontRecrutment/job_space/js/vendor/jquery-2.2.4.min.js' %}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/vendor/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+          <script src="{% static 'FrontRecrutment/job_space/js/easing.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/hoverIntent.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/superfish.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.sticky.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/jquery.nice-select.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/parallax.min.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/mail-script.js' %}"></script>
+        <script src="{% static 'FrontRecrutment/job_space/js/main.js' %}"></script>
+    </body>
+</html>
+
+
+

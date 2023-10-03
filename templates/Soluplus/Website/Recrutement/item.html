@@ -1,0 +1,140 @@
+{% extends 'Soluplus/Website/Utils/main.html' %}
+{% load static %}
+
+{% block page %}  
+
+
+        <!-- Start post Area -->
+        <section class="post-area section-gap">
+            <div class="container">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-8 post-list">
+                        <div class="single-post d-flex flex-row">
+                            <div class="thumb">
+                                <img src="{% static 'FrontRecrutment/job_space/img/work.png' %}" alt="">
+                                {% now "Y-m-d" as todays_date %}
+                                    {% if model.dateclose|date:"Y-m-d" > todays_date  %}
+                                        <ul class="tags">
+                                            <li>
+                                                <a href="#">
+                                                    {% if model.status == 1 %}
+                                                    en cours
+                                                    {% elif model.status == 2 %}
+                                                        annuler
+                                                    {% elif model.status == 3 %}
+                                                        attente
+                                                    {% elif model.status == 4 %}
+                                                        inconnu
+                                                    {% endif %}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    {% else %}
+                                    <ul class="tags">
+                                        <li>Dépassée</li>
+                                    </ul>
+                                {% endif %}
+                            </div>
+                            <div class="details">
+                                <div class="title d-flex flex-row justify-content-between">
+                                    <div class="titles">
+                                        <a href=""><h4>{{model.titre}}</h4></a>
+                                        <h6>Publié: {{model.datepublish| date:'d/m/Y'}}</h6>
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    {% now "Y-m-d" as todays_date %}
+                                    {% if model.dateclose|date:"Y-m-d" > todays_date  %}
+                                    <ul class="btns" style="float: right;">
+                                        <li><a href="{% url 'website_apply_offre' model.id %}">Postuler</a></li>
+                                    </ul>
+                                    {% else %}
+                                    <div>
+                                        <span>Date Dépassée</span>
+                                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"></span>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <stong>Entreprise:{{model.entreprise}}</strong>
+                                <p>Responsable: {{model.responsable}}</p>
+                                <p><span class="lnr lnr-map"></span> Lieu: {{model.localisation}}</p>
+                                <p class="address"><span class="lnr lnr-pushpin"></span> Contrat: {{model.typecontrat}}</p>
+                                <p class="address"><span class="lnr lnr-calendar-full"></span> Fin: {{model.dateclose| date:'d/m/Y'}}</p>
+                            </div>
+                        </div>
+                        <div class="single-post job-details">
+                            <h4 class="single-title">Description</h4>
+                            <p>
+                                {{model.description|linebreaks}}
+                            </p>
+                        </div>
+                        <div class="single-post job-experience">
+                            <h4 class="single-title">Rôles et responsabilités</h4>
+                            <p>{{model.tache|linebreaks}}</p>
+                        </div>
+                        <div class="single-post job-experience">
+                            <h4 class="single-title">Qualification Requise</h4>
+                            <p>
+                                {{model.qualification|linebreaks}}
+                            </p>
+                        </div>
+                        <div class="single-post job-experience">
+                            <h4 class="single-title">Comment postuler ?</h4>
+                            <p>
+                                {{model.proccess|linebreaks}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 sidebar">
+                        <div class="single-slidebar">
+                            <h4>Emploi Par ville</h4>
+                            <ul class="cat-list">
+                                <li><a class="justify-content-between d-flex"><p>Kinshasa</p><span>{{ville.kin}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Lubumbashi</p><span>{{ville.lushi}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Goma</p><span>{{ville.goma}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Matadi</p><span>{{ville.matadi}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Kisangani</p><span>{{ville.kisang}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Lualaba</p><span>{{ville.lualaba}}</span></a></li>
+                                <li><a class="justify-content-between d-flex"><p>Bukavu</p><span>{{ville.bukavu}}</span></a></li>
+                            </ul>
+                        </div>
+
+                        <div class="single-slidebar">
+                            <h4>Recentes Publications</h4>
+                            <div class="active-relatedjob-carusel">
+
+                                {% for item in recente %}
+                                <div class="single-rated">
+                                    <img class="img-fluid" src="{% static 'FrontRecrutment/job_space/img/work.png' %}" alt="">
+                                    <a href="{% url 'website_item_offre' item.id %}"><h4>{{item.titre}}</h4></a>
+                                    <h6>Publié: {{item.datepublish| date:'d/m/Y'}}</h6>
+                                    <p class="limiteDescrib">
+                                        {{item.description}}
+                                    </p>
+                                    <h5>Entreprise:{{item.entreprise}}</h5>
+                                    <p><span class="lnr lnr-map"></span> Lieu: {{item.localisation}}</p>
+                                    <p class="address"><span class="lnr lnr-pushpin"></span> Contrat: {{item.typecontrat}}</p>
+                                    <p class="address"><span class="lnr lnr-calendar-full"></span> Fin: {{item.dateclose| date:'d/m/Y'}}</p>
+                                    <a href="{% url 'website_item_offre' item.id %}" class="btns text-uppercase">Voir Plus</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- <div class="single-slidebar">
+                            <h4>Jobs by Category</h4>
+                            <ul class="footer-nav">
+                                <li class="menu-active"><a href="https://hodari.cd/">Accueil</a></li>
+                                <li><a href="https://hodari.cd/about.html">A propos</a></li>
+                                <li><a href="https://hodari.cd/valeur.html">Nos valeurs</a></li>
+                                <li><a href="https://hodari.cd/mission.html">Mission</a></li>
+                                <li><a href="https://hodari.cd/contact">Contact</a></li>
+                            </ul>
+                        </div> -->
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End post Area -->
+        {% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'Soluplus/Website/utils.html' %}
+{% load  staticfiles %}
+{% block page %}
+
+<section id="colors">
+	<div class="view">
+		<img alt class="bg" src="{% static 'Website/images/bcg1.jpg' %}" /> <img alt class="bg" src="{% static 'Website/images/bcg2.jpg' %}" />
+		<div class="content half-size colors-h">
+			<h2>CONTACT</h2>
+			<div class="header-details"><span class="highlight">Hodari</span></div>
+		</div>
+	</div>
+	
+	
+</section>
+
+<section id="contact">
+	<div class="view">
+		<img alt class="bg" src="{% static 'Website/images/bcgd2.jpg' %}" /><img alt class="bg" src="{% static 'Website/images/bcgd2.jpg' %}" /> />
+		<div class="content full-size colors-h">
+			<div class="container">
+				<h2>Contact</h2>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="text-right scroll-in-animation" data-animation="fadeInLeft">
+							<p class="big-font uppercase">
+								Tel: <strong class="highlight">+243 900 010 039</strong>
+							</p>
+							<p class="big-font uppercase">
+								N°130/A,  Boulevard du 30 juin, Immeuble SANASH, 5ème étage, appartement 5B, 
+									Commune de la Gombe.
+							</p>
+							<p class="big-font">
+								<b>
+							<a href="mailto:contact@hodari.cd">contact@hodari.cd</a><br/>
+							<a href="mailto:recrutement@hodari.cd">recrutement@hodari.cd</a><br/>
+							<a href="https://www.hodari.cd">www.hodari.cd</a>
+							
+						</b>
+							</p>
+							<p class="big-font">
+								<a target="_blank" href="https://web.facebook.com/Hodari-109955807848896/"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x heading"></i><i class="fa fa-facebook fa-stack-1x text-background"></i></span></a>
+								<a target="_blank" href="https://www.linkedin.com/company/73224868"><span class="fa-stack"><i class="fa fa-circle fa-stack-2x heading"></i><i class="fa fa-linkedin fa-stack-1x text-background"></i></span></a>
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6">
+						
+						<iframe class="text-left scroll-in-animation" data-animation="fadeInRight" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8851.282836893013!2d15.310969034351563!3d-4.3037359397042545!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3de1ba58997e4fb1!2sHodari%20%3A%20Services%20RH%20et%20Juridique!5e0!3m2!1sfr!2scd!4v1618788380434!5m2!1sfr!2scd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					</div>
+				</div>
+				<br> <br>
+
+				<p class="header-details">Ecrivez-nous</p>
+				<div class="row">
+
+					
+					<div class="col-md-12">
+						
+
+						<div class="text-left scroll-in-animation" data-animation="fadeInRight">
+
+							<form id="myForm" class="ajax-form" data-message-class="colors-e background-95 border heading" action="sendEmail.php" method="post" novalidate="novalidate">
+								
+								<h6 class="sent-notification" style="color: white;"></h6>
+								<div class="row">
+									<div class="col-md-6 control-group">
+										<div class="alt-placeholder">Name</div>
+										<input type="text" id="name" value="" size="40" placeholder="Nom" data-validation-required-message="Veuillez completer ce champs svp!" required>
+										<div class="help-block"></div>
+									</div>
+									<div class="col-md-6 control-group">
+										<div class="alt-placeholder">Email</div>
+										<input type="email" id="email" value="" size="40" placeholder="Email" data-validation-required-message="Veuillez completer ce champs svp!" required>
+										<div class="help-block"></div>
+									</div>
+									<div class="col-md-12 control-group">
+										<div class="alt-placeholder">Sujet</div>
+										<input type="text" id="subject" value="" size="40" placeholder="Sujet" data-validation-required-message="Veuillez completer ce champs svp!" required>
+										<div class="help-block"></div>
+									</div>
+									<div class="col-md-12 control-group">
+										<div class="alt-placeholder">Message</div>
+										<textarea id="body" placeholder="Message" data-validation-required-message="Veuillez completer ce champs svp!" required></textarea>
+										<div class="help-block"></div>
+									</div>
+									<div class="col-md-12">
+										<input class="button" onclick="sendEmail()" type="submit" value="Envoyer">
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

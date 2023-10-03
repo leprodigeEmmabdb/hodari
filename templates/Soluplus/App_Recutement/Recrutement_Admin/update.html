@@ -1,0 +1,189 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'app_recrutement_list_offre_admin' %}">List Offre</a></li>
+            <li class="active"><a href="{% url 'app_recrutement_detail_offre_admin' model.id %}">Detail Ofrre</a></li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+
+            <div class="panel-body" >
+                <form class="needs-validation" novalidate method="POST" id="form" action="{% url 'app_recrutement_post_update_offre_admin' %}">
+                    {% csrf_token %}
+                    <input type="text" name="ident" id="ident" value="{{model.id}}" class="form-control" style="display:none;" required>
+                    <input type="text" name="ref" id="ref" value="{{model.reference}}" class="form-control" style="display:none;" required>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="titre" class="control-label col-lg-4">Titre</label>
+                            <input name="titre" id="titre" value="{{model.titre}}" class=" form-control" required>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="status" class="control-label col-lg-4">Status</label>
+                            <select name="status" id="status" class="form-control">
+                                <option {% if model.status == 1 %} {{ "selected" }} {% endif %}  value="1">en cours</option>
+                                <option {% if model.status == 2 %} {{ "selected" }} {% endif %}  value="2">cloturée</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="datepublish" >Date Publication :</label>
+                            <div class="input-group">
+                                <input name="datepublish" type="text" class="form-control" value="{{ model.datepublish|date:"d/m/Y"}}" placeholder="mm/dd/yyyy" id="datepublish" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="localisation" class="control-label col-lg-4">Localisation</label>
+                            <input name="localisation" value="{{model.localisation}}" id="localisation" class=" form-control" required>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="dateclose">Date Close :</label>
+                            <div class="input-group">
+                                <input name="dateclose" type="text" value="{{model.dateclose|date:"d/m/Y"}}" class="form-control" placeholder="mm/dd/yyyy" id="dateclose" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="typecontrat" class="control-label col-lg-4">Type Contrat</label>
+                            <input name="typecontrat" value="{{model.typecontrat}}" id="typecontrat" class=" form-control" required>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="entreprise" class="control-label col-lg-4">Entreprise</label>
+                            <input name="entreprise" value="{{model.entreprise}}" id="entreprise" class=" form-control" required>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="responsable" class="control-label col-lg-4">Responsable</label>
+                            <input name="responsable" value="{{model.responsable}}" id="responsable" class=" form-control" required>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="proccess" class="control-label col-lg-4">Proccess</label>
+                            <textarea name="proccess"  id="proccess" class=" form-control" required>{{model.proccess}}</textarea>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="description" class="control-label col-lg-12">Description</label>
+                            <textarea name="description"  id="description" class=" form-control" required>{{model.description}}</textarea>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="tache" class="control-label col-lg-4">Tache</label>
+                            <textarea name="tache"  id="tache" class=" form-control" required>{{model.tache}}</textarea>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="qualification" class="control-label col-lg-4">Qualification</label>
+                            <textarea name="qualification"  id="qualification" class=" form-control" required>{{model.qualification}}</textarea>
+                            <div class="invalid-tooltip">
+                                Veuillez remplir ce champs
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row row_formulaire">
+                        <div class="col-md-6">
+                            <label for="actif" class="control-label col-lg-4">Actif</label>
+                            <select name="actif" id="actif" class="form-control">
+                                <option {% if model.est_actif == 1 %} {{ "selected" }} {% endif %}  value="1">True</option>
+                                <option {% if model.est_actif == 2 %} {{ "selected" }} {% endif %}  value="2">False</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <div class="form-group">
+                        <div class="col-lg-offset-1 col-lg-11">
+                            <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                            <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+
+</div> <!-- End row -->
+
+<script>
+    $('#sandbox-container .input-group date').datepicker({
+        todayBtn: true,
+        clearBtn: true,
+        language: "ca",
+        autoclose: true,
+        todayHighlight: true
+    });
+</script>
+<script>
+    $(document).ready(function(){
+        jQuery('#datepublish').datepicker();
+        jQuery('#dateclose').datepicker();
+    });
+</script>
+
+<script>
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd',
+        startDate: '-3d'
+    });
+</script>
+{% endblock %}

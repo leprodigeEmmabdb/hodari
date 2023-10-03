@@ -1,0 +1,147 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+<div class="row" style="padding: 10px;">
+    <div class="col-md-12">
+        <div class="panel panel-color panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Permissions </h3> 
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+
+                    <form method ="POST" action="{% url 'post_add_permission' %}">
+                        {% csrf_token %}
+                        <input name="profil_id" type="hidden" value="{{ profil_id }}">
+                        
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <select multiple="multiple" class="multi-select" id="my_multi_select2" name="my_multi_select2[]" >
+    
+                                        {% regroup droits by menu as droit_list %}
+                                        {% for item in droit_list %}
+    
+                                            <optgroup label="{{ item.grouper }}">
+                                                {% for item2 in item.list %}
+                                                    <option value="{{item2.id}}">{{ item2.droit }}</option>
+                                                {% endfor %}
+                                            </optgroup>
+                                        {% endfor %}
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <br> <br> 
+                        <div class="form-group">
+                            <div class="col-lg-offset-1 col-lg-11">
+                                <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div> <!-- End Row -->
+
+
+<script>
+    jQuery(document).ready(function() {
+            
+        // Tags Input
+        jQuery('#tags').tagsInput({width:'auto'});
+
+        // Form Toggles
+        jQuery('.toggle').toggles({on: true});
+
+        // Time Picker
+        jQuery('#timepicker').timepicker({defaultTIme: false});
+        jQuery('#timepicker2').timepicker({showMeridian: false});
+        jQuery('#timepicker3').timepicker({minuteStep: 15});
+
+        // Date Picker
+        jQuery('#datepicker').datepicker();
+        jQuery('#datepicker-inline').datepicker();
+        jQuery('#datepicker-multiple').datepicker({
+            numberOfMonths: 3,
+            showButtonPanel: true
+        });
+        //colorpicker start
+
+        $('.colorpicker-default').colorpicker({
+            format: 'hex'
+        });
+        $('.colorpicker-rgba').colorpicker();
+
+
+        //multiselect start
+
+        $('#my_multi_select1').multiSelect();
+        $('#my_multi_select2').multiSelect({
+            selectableOptgroup: true
+        });
+
+        $('#my_multi_select3').multiSelect({
+            selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+            selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='search...'>",
+            afterInit: function (ms) {
+                var that = this,
+                    $selectableSearch = that.$selectableUl.prev(),
+                    $selectionSearch = that.$selectionUl.prev(),
+                    selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                    selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                    .on('keydown', function (e) {
+                        if (e.which === 40) {
+                            that.$selectableUl.focus();
+                            return false;
+                        }
+                    });
+
+                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                    .on('keydown', function (e) {
+                        if (e.which == 40) {
+                            that.$selectionUl.focus();
+                            return false;
+                        }
+                    });
+            },
+            afterSelect: function () {
+                this.qs1.cache();
+                this.qs2.cache();
+            },
+            afterDeselect: function () {
+                this.qs1.cache();
+                this.qs2.cache();
+            }
+        });
+
+        
+    });
+</script>
+
+{% endblock %}

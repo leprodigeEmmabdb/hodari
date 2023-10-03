@@ -1,0 +1,68 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+{% block page %}
+  
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'front_index' %}">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            
+            <div class="panel-body">
+                <div class=" form">
+                    <form class="needs-validation" novalidate method="POST" id="form" action="{% url 'front_post_add_livraison' %}">
+                        {% csrf_token %}
+
+                        <br>
+
+                        <!-- Appel de la fonction message -->
+                        {% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}        
+
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="numero" class="control-label col-lg-4">Numéro</label>
+                                <input name="numero" id="" class=" form-control">
+                            </div> 
+                        </div>
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="receveur" class="control-label col-lg-4">Receveur</label>
+                                <input name="receveur" id="" class=" form-control">
+                            </div> 
+                        </div>
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="colis_id" class="control-label col-lg-6">Colis</label>
+                                <select name="colis_id" id="colis_id"  class="form-control" required>
+                                    <option value="{{colis.id}}">{{colis.numero}}</option>
+                                </select>
+                           </div>
+                        </div>
+                        <br>
+                        <br> <br>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- .form -->
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+
+</div> <!-- End row -->
+
+{% endblock %}

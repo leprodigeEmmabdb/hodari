@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="report.css">
+</head>
+<body>
+    <style>
+        
+    </style>
+    
+    <div class="row">
+                    
+                    
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <center> <img src="{% static 'Soluplus/images/app-logo.png' %}" alt="" style="width: 300px;"> </center> 
+            
+            <hr>
+            
+            <h5> <center><u style="text-transform: uppercase;">P.V DE TRESORERIE ( {{ model.type.designation}} )</u></center>  </h5>
+            <br>
+            
+
+            {{model.date_pv | date:'d'}} jour du mois de {{model.date_pv | date:'M'}}, l'an 2020 à {{model.date_pv | date:'H:m'}} <br> <br>
+            Nous, <strong>{{ model.participants }}</strong> <br>
+            <p>Respectivement Trésorerie Générale, Caissier central et Gérant des opérations, avons procédé à la vérification physique
+                des soldes théoriques et physiques de {{ model.type.designation}} en date du jour. <br>
+                Ainsi, après constat, sur base des fiches de caisse dument remplies par les caissiers, il ressort que les soles finaux théoriques sont égaux aux physiques après comptage. Le Caissier a donc remis, à notre présence au trésor, les sommes d'argent reparties de la manière suivante:
+            </p>
+            
+            <br><br>
+            
+            <div class="table-responsive">
+                <table class="table" style="border-collapse: collapse;border: 1px, solid black;">
+                    <thead>
+                        
+
+                        <tr>
+                            <th style="width: 20%;">LIBELLES</th>
+                            <th style="width: 27%;" colspan="2">RECETTES/OPEN BALANCE</th>
+                            <th style="width: 27%; background-color: blue !important;" colspan="2">ECART</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>USD</th>
+                            <th>CDF</th>
+                            <th>USD</th>
+                            <th>CDF</th>
+                    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in lignes %}
+                            <tr>
+                                <td>{{ item.Compte }}</td>
+                                <td>{{ item.Open_USD | sep_float }} USD</td>
+                                <td>{{ item.Open_CDF | sep_float }} CDF</td>
+                                <td>{{ item.Ecart_USD | sep_float }} USD</td>
+                                <td>{{ item.Ecart_CDF | sep_float }} CDF</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot style="background-color: peru;">
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td> <strong> {{totalOpenUSD | sep_float}} USD</strong></td>
+                            <td> <strong> {{totalOpenCDF | sep_float}} CDF</strong></td>
+                            <td> <strong> {{totalEcartUSD | sep_float}} USD</strong></td>
+                            <td>  <strong> {{totalEcartCDF | sep_float}} CDF</strong></td>
+                        </tr>
+                        
+                    </tfoot>
+                </table>
+                <br>
+            </div>
+
+            
+            <p>
+                <div>Autres observations</div>
+                
+                <p>
+                    {{model.observation}}
+                </p>
+            </p>
+            <br><br> <br> <br>
+            <div style="float: right;padding-right: 60px;">
+                <div>Fait à Kinshasa, le {{ model.date_pv | date:'d/m/Y'}}</div>
+                <div style="float: right;padding-right: 80px;">Tous</div>
+            </div>
+            
+
+                        
+            
+            
+            
+        </div>
+    </div>
+</body>
+</html>

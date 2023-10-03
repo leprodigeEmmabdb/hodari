@@ -1,0 +1,42 @@
+{% extends 'Soluplus/Website/utils.html' %}
+{% load  staticfiles %}
+{% block page %}
+
+<section id="home" >
+	<div class="view">
+		<img alt class="bg" src="{% static 'Website/images/img6.jpg' %}"/> <img alt class="bg" src="{% static 'Website/images/img1.png' %}" /><img alt class="bg" src="{% static 'Website/images/img2.png' %}" /> <img alt class="bg" src="{% static 'Website/images/img9.jpg' %}" /> <img alt class="bg" src="{% static 'Website/images/img8.jpg' %}" /> <img alt class="bg" src="{% static 'Website/images/img5.jpg' %}" />
+		<div class="content home-suzi full-size colors-d background-0" >
+			<div class="container">
+				<h2><span class="thin-font-weight">Nous <span class="highlight">Sommes</span></span></h2>
+				
+				<h1 class="text-center">Hodari</h1>
+				
+				<p class="text-center"><a href="about.html" class="button background-60-d heading-d border-hard">À propos de nous</a><a href="mission.html#work" class="button background-60-f heading-f border-hard">Notre vision</a></p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="services">
+	
+	<div class="view">
+		<img alt class="bg" src="{% static 'Website/images/bcg1.jpg' %}" /> <img alt class="bg" src="{% static 'Website/images/bcg2.jpg' %}" />
+		<div class="content half-size colors-h">
+			<div class="container">
+				<div class="show-list slogan">
+					<div class="show-item">Nous sommes transparents</div>
+					<div class="show-item">Nous sommes rigoureux</div>
+					<div class="show-item">Nous sommes courageux</div>
+				</div>
+				<div class="separator"></div>
+				<p class="text-center big-font">
+					<em>— Hodari —</em>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+		
+{% endblock %}
+		
+		

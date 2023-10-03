@@ -1,0 +1,104 @@
+{% extends 'Soluplus/MainApp/Utils/shared_home_front.html' %}
+{% load staticfiles %}
+
+{% block page2 %}
+
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft" >
+            <div class="user-details">
+                <div class="pull-left">
+                    <img src="{% static 'Soluplus/images/avatar-1.png' %}" alt="" class="thumb-md img-circle">
+                </div>
+                <div class="user-info">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user}} <!--span class="caret"></span--></a>
+                        <!--ul class="dropdown-menu">
+                            <li><a href="{% url 'front_logout' %}"><i class="md md-settings-power"></i> Déconnexion</a></li>
+                        </ul-->
+                    </div>
+                    
+                    <p class="text-muted m-0">{{user__user.nom}}</p>
+                </div>
+            </div>
+            <!--- Divider -->
+            <div id="sidebar-menu">
+                
+                <ul>
+                    <li>
+                        <a href="{% url 'front_index' %}" ><i class="mdi mdi-contact-mail-outline"></i><span style="color : #1479a7;"> Accueil </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_colis' %}" ><i class="mdi mdi-contact-mail-outline"></i><span style="color : #1479a7;"> Colis </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_groupage' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Groupage </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_expedition' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Expéditions </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_livraison' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Mes livraisons </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_facture' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Factures </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_client' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Clients </span></a>
+                    </li> 
+                </ul>
+                
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Left Sidebar End -->   
+        
+    <div style="padding-top: 100px;">        
+      <div class="container2">
+          <!-- Appel de la fonction message -->
+          {% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+          <div class="header text-center">
+              <h1>Bienvenue sur la Plateforme</h1>
+              <p class="commentaire" style="font-size: 18px;padding: 0px 5px;color: grey; font-family: 'Circular Std Book';"> Modules de gesion </p>
+          </div>
+
+          
+          <div class="cards">
+              <div class="row">
+                
+                <div class="col-md-6">
+                  <div class="home-card">
+                    <div class="content">
+                      <h1 style="font-size: 20px!important;"> Groupage </h1>
+                      <p class="text-center" style="font-size: 12px;color:#444;margin-top: -5px;font-weight: 400;height: 2.25rem;margin-bottom: 1.5rem; font-family: 'Circular Std Book';">{{ item.description}} </p>
+                      <a href="#" onclick="javascript:launch_scan('groupage')" class="link">Scanner</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="home-card">
+                    <div class="content">
+                      <h1 style="font-size: 20px!important;"> Colis </h1>
+                      <p class="text-center" style="font-size: 12px;color:#444;margin-top: -5px;font-weight: 400;height: 2.25rem;margin-bottom: 1.5rem; font-family: 'Circular Std Book';">{{ item.description}} </p>
+                      <a href="#" onclick="javascript:launch_scan('colis')" class="link">Scanner</a>
+                    </div>
+                  </div>
+                </div>   
+              </div>
+          </div>                
+      </div>
+       
+    </div>
+
+<script>
+  function launch_scan(type){
+    JSBridge.launchScanActivity(type);
+  }
+
+</script>
+
+{% endblock %}

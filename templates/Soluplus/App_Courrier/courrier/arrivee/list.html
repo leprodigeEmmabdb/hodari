@@ -1,0 +1,79 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="{% url 'app_courrier_add_arrivee' %}" class="btn btn-inverse waves-effect waves-light m-b-5"> <i class="fa fa-plus"></i> <span>Créer</span> </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Numéro</th>
+                                        <th>Date rec.</th>
+                                        <th>Date Rép.</th>
+                                        <th>Expéditeur</th>
+                                        <th>Destinataires</th>
+                                        <th>Objet</th>
+                                        <th>Nature</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                </thead>
+                                
+                                <tbody>
+
+                                    {% for item in model %}
+                                        <tr>
+                                            <td style="width: 10px;"></td>
+                                            <td><a href="{% url 'app_courrier_details_arrivee' item.id%}">{{ item.numero }}</a></td>     
+                                            <td>{{ item.date_reception | date:'d-m-Y'}}</td>
+                                            <td>{{ item.date_reponse | date:'d-m-Y'}}</td>
+                                            <td>{{ item.expediteur.nom }}</td>
+                                            <td> 
+                                                {% for itm in item.destinataires %}
+                                                    {{ itm.destinataire.nom_complet }} ,
+                                                {% endfor %} 
+                                            </td>
+                                            <td>{{ item.objet }}</td>
+                                            <td> {{item.nature.designation}} </td>
+                                            <td>{{ item.etat }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}            
+
+
+        
+    

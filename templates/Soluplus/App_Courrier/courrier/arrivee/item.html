@@ -1,0 +1,162 @@
+
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% block page %}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                
+                {% if model.est_traite == False %}
+                    <a href="{% url 'app_courrier_arrivee_traiter' model.id %}" class="btn btn-success waves-effect waves-light m-b-5"> <i class="fa fa-check"></i> <span>Traiter</span> </a>
+                    <a href="#" class="btn btn-danger waves-effect waves-light m-b-5"> <i class="fa fa-edit"></i> <span>Modifier</span> </a>
+                {% endif %}
+                
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Nature : </h6><p>{{model.nature.designation}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Numéro : </h6><p>{{model.numero}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Date d'envoi :</h6><p>{{ model.date_envoi | date:'d-m-Y'}}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Expéditeur : </h6><p>{{model.expediteur.nom_complet}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Objet : </h6><p>{{model.objet}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Date réception :</h6><p>{{ model.date_reception | date:'d-m-Y'}}</p>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Repondre avant le : </h6><p>{{ model.date_reponse | date:'d-m-Y'}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Remarque : </h6><p>{{model.remarque}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Date réception :</h6><p>{{ model.date_reception | date:'d-m-Y'}}</p>
+                            </div>
+                        </div>
+                        
+                        
+                        <br>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Numéro enregistrement : </h6><p>{{ model.numero_enregistrement}}</p>
+                            </div>
+                            
+                            {% if model.est_traite == True %}
+                                <div class="col-md-4">
+                                    <h6>Traité le : </h6><p>{{ model.date_traitement | date:'d-m-Y'}}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                            
+                        <br>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <center> <strong style="color: rgb(225, 49, 48)">Destinataires</strong> </center> 
+                                <hr>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Destinataire
+                                                </th>
+                                                <th>
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody> 
+                                            {% for itm1 in model.destinataires %}
+                                                <tr>
+                                                    <td> {{ itm1.destinataire.nom_complet }} </td>
+                                                    <td>{{ itm1.action }}</td>
+                                                </tr>
+                                                
+                                            {% endfor %}
+                
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <center> <strong style="color: rgb(225, 49, 48)">Pièces jointes</strong> </center> 
+                                <hr>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Pièce
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody> 
+                                            {% for item in model.documents%}
+                                                <tr>
+                                                    <td><a href="/static{{item.url_document}}">{{item.description}}</a></td>
+                                                </tr>
+                                                
+                                            {% endfor %}
+                
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}
+
+
+
+
+        
+    
+

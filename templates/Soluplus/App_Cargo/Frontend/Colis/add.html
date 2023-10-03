@@ -1,0 +1,142 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+{% block page %}
+  
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            
+            <div class="panel-body">
+                <div class=" form">
+                    <form class="needs-validation" novalidate method="POST" id="form" action="{% url 'front_post_add_colis' %}">
+                        {% csrf_token %}
+
+                        <br>       
+
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="numero" class="control-label col-lg-4">Numéro</label>
+                                <input name="numero" id="" class=" form-control">
+                            </div> 
+
+                            <div class="col-md-6">
+                                <label for="client_id" class="control-label col-lg-6" >Client</label>
+                                <select name="client_id" id=""  class="selectpicker form-control" data-container="body" data-live-search="true" title="Choisir un client" data-hide-disabled="true"  required>
+                                    
+                                    {% for item in clients %}
+                                        <option value="{{item.id}}">{{item}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div> 
+                            
+                        </div> 
+
+                        <div class="row row_formulaire">
+                            
+                            <div class="col-md-6">
+                                <label for="type_id" class="control-label col-lg-6">Type de colis</label>
+                                <select name="type_id" id=""  class="form-control" required>
+                                    <option value="">Séléctionnez un type</option>
+                                    {% for item in types %}
+                                        <option value="{{item.id}}">{{item}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <label for="montant" class="control-label col-lg-4">Montant USD</label>
+                                <input name="montant" id="" class=" form-control" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="recepteur" class="control-label col-lg-4">Recepteur</label>
+                                <input name="recepteur" id="" class=" form-control" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <label for="tel_recepteur" class="control-label col-lg-4">Tél. recepteur</label>
+                                <input name="tel_recepteur" id="" class=" form-control" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                            </div> 
+                        </div> 
+
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="poids" class="control-label col-lg-4">Poids</label>
+                                <input name="poids" id="" class=" form-control" required>
+                                <div class="invalid-tooltip">
+                                    Veuillez remplir ce champs
+                                </div>
+                            </div> 
+
+                            <div class="col-md-6">
+                                <label for="unite_id" class="control-label col-lg-6">Unité de mesure</label>
+                                <select name="unite_id" id=""  class="form-control" required>
+                                    <option value="">Séléctionnez un unité</option>
+                                    {% for item in unites %}
+                                        <option value="{{item.id}}">{{item}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="row row_formulaire">
+                            <div class="col-md-6">
+                                <label for="provenance_id" class="control-label col-lg-6">Provenance</label>
+                                <select name="provenance_id" id=""  class="selectpicker form-control" data-container="body" data-live-search="true" title="Choisir une provenance" data-hide-disabled="true"  required>
+                                    {% for item in emplacements %}
+                                        <option value="{{item.id}}">{{item.designation}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>  
+
+                            <div class="col-md-6">
+                                <label for="destination_id" class="control-label col-lg-6">Destination</label>
+                                <select name="destination_id" id=""  class="selectpicker form-control" data-container="body" data-live-search="true" title="Choisir une destination" data-hide-disabled="true"  required>
+                                    {% for item in emplacements %}
+                                        <option value="{{item.id}}">{{item.designation}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div> 
+                        </div> 
+                        <br>
+                        <br> <br>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2 col-lg-10">
+                                <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                            </div>
+                        </div>
+                    </form>
+                </div> <!-- .form -->
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+
+</div> <!-- End row -->
+
+
+
+{% endblock %}

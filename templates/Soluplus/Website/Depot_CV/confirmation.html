@@ -1,0 +1,36 @@
+{% extends 'Soluplus/Website/Utils/main.html' %}
+{% load static %}
+
+{% block page %}            
+
+    <!-- Start download Area -->
+			<section class="download-area section-gap" id="app">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4 download-left">
+							<img class="img-fluid" src="{% static 'FrontRecrutment/job_space/img/d1.png' %}" alt="">
+						</div>
+						<div class="col-lg-8 download-right">
+							<h1>Cher {{model.candidat.prenom}} {{model.candidat.nom}},<br></h1>
+							<p class="subs">
+								Nous vous remercions pour l'intérêt que vous portez à notre entreprise et de l'initiative que vous avez prise de deposer votre CV.
+							</p>
+                            <p>
+                                Vos documents sont bien arrivés chez nous et nous les examinerons dès que possible.
+                            </p>
+                            <p>
+                                Lorsque nous aurons évalué votre profil et que nous souhaiterons vous considérer pour l'étape suivante de notre processus de sélection, vous serez invité à un entretien.
+                            </p>
+                            <p>
+                                Nous serons heureux de répondre à toutes les questions que vous pourriez avoir, que ce soit sur le poste vacant ou sur notre processus de recrutement. Veuillez contacter en cliquant ici <a href="https://hodari.cd/contact">Hodari</a>, soit en envoyant un courriel à contact@hodari.cd, soit en appelant +243 800 000 000.
+                            </p>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End download Area -->
+
+{% endblock %}
+
+
+

@@ -1,0 +1,102 @@
+
+{% load separateur %}
+{% load staticfiles %}        
+
+<style>
+    strong,
+    abbr,
+    address,
+    p,
+    th,
+    td{
+        font-size: 9px !important;
+    }
+</style>
+
+<div class="row">
+    <div class="pull-left">
+        <h6 class="text-right"><img src="{% static 'Soluplus/images/gradeco-logo.png' %}" alt="velonic" style="width: auto;height: 50px;"></h6>
+    </div>
+    <div class="pull-right">
+        <h6>Facture #<br>
+            <strong> {{model.numero}} </strong>
+        </h6>   
+        <h6>Commande #<br>
+            <strong> {{model.bon_commande.numero}} </strong>
+        </h6> 
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        
+        <div class="pull-left m-t-30">
+            <address>
+                <strong> {{model.client.nom}} </strong><br>
+                {{model.client.adresse}} <br>
+                {{model.client.email}} <br>
+                <abbr title="Phone">Phone:</abbr> {{model.client.phone}}
+                </address>
+        </div>
+        <div class="pull-right m-t-30">
+            <p><strong>Date: </strong> {{model.date | date:'d-m-Y'}} </p>
+            
+            {% if model.statut == 1 %}
+                <p><strong>Date Expiration: </strong> {{model.date_expiration | date:'d-m-Y'}} </p>    
+            {% endif %}
+                
+            
+            <p class="m-t-10"><strong>Statut: </strong> <span class="label label-pink"> {{model.statut.designation}}</span></p>
+        </div>
+    </div>
+</div>
+<br>
+<div class="m-h-50"></div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="table-responsive">
+            <table class="table m-t-30">
+                <thead>
+                    <th>Article</th>
+                    <th>Description</th>
+                    <th>Qte</th>
+                    <th>P.U</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody>
+
+                    {% for item in lignes %}
+                        <tr>
+                            <td>{{ item.article.designation }}</td>
+                            <td> {{item.description}} </td>
+                            <td> {{item.quantite}} </td>
+                            <td> {{item.prix_unitaire}} {{model.devise.designation}} </td>
+                            <td> {{ item.total }} {{model.devise.designation}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row" style="border-radius: 0px;">
+    <div class="col-md-3">
+        <p><b>Total $ HT:</b> {{model.montant_total}} {{model.devise.designation}}</p>
+        <p >TVA: 0</p>
+        <p><b>Total $ TTC:</b> {{model.montant_total}} {{model.devise.designation}}</p>
+        <p><b>Montant restant :</b> {{model.montant_restant}}</p>
+        
+    </div>
+</div>
+
+
+<footer>
+    <center>
+        <hr>
+        <p>Adresse sociale : Nouvelles Galleries Présidentielles, C/Gombe</p>
+        <p>Email : gradecoclients@gmail.com Tél: 00 243 813 126 550 RCCM : CD/KIN/RCCM/14-A-17107</p>
+        <p>N° Impot : A1110529H   Id Nat : 01-93-N62751W Compte bancaire : GRADECO ETS 00017-11006-56564280001-74 TMB USD</p>
+    </center>
+</footer>

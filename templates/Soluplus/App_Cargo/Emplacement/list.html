@@ -1,0 +1,58 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="{% url 'app_cargo_add_emplacement' %}" class="btn btn-inverse waves-effect waves-light m-b-5"> <i class="fa fa-plus"></i> <span>Créer</span> </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>designation</th>
+                                    <th>designation courte</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in model %}
+                                    <tr>
+                                        <td style="width: 10px;"></td>
+                                        <td> 
+                                            <a href="{% url 'app_cargo_detail_emplacement' item.id %}">{{ item.designation }}</a>                         
+                                        </td>
+                                        <td> {{ item.designation_court }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'front_index' %}">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+
+            <div class="panel-heading">
+                               
+            </div>
+            <div class="panel-body">
+                
+                <br><br>
+                <div class="row" style="padding: 50px;">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="date_requete" >Nom</label>
+                                <h5>{{model.nom}}</h5>
+                            </div>
+                    
+                            <div class="col-md-6">
+                                <label for="type_requete" >Postnom</label>
+                                <h5>{{model.postnom}}</h5>
+                            </div>          
+                        </div>
+                        
+                        <div class="row row_detail">
+                            
+                            <div class="col-md-6">
+                                <label for="caisse_prov" >Prenom</label>
+                                <h5>{{model.prenom}}</h5>
+                            </div> 
+    
+                            <div class="col-md-6">
+                                <label for="caisse_dest" >Adresse</label>
+                                <h5>{{model.adresse}}</h5>
+                            </div>
+                        </div>
+    
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="montant" >Email</label>
+                                <h5>{{model.email}}</h5>
+                            </div> 
+    
+                            <div class="col-md-6">
+                                <label for="devise" >Téléphone</label>
+                                <h5>{{model.phone}}</h5>
+                            </div> 
+                        </div>
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                <label for="montant" >Nom d'utilisateur</label>
+                                <h5>{{model.user.username}}</h5>
+                            </div> 
+                            
+                            <div class="col-md-6">
+                                <label for="montant" >Profil</label>
+                                <h5>{{model.profil.designation}}</h5>
+                            </div> 
+                            
+                        </div>
+                        <div class="row row_detail">
+                            <div class="col-md-6">
+                                {% if model.est_caissier == True %}
+                                    <label for="montant" >Caisse</label>
+                                    <h5>{{model.caisse.designation}}</h5>
+                                {% endif %}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+</div> <!-- End Row -->
+
+
+{% endblock %}

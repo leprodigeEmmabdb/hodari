@@ -1,0 +1,56 @@
+{% extends 'Soluplus/App_Cargo/Frontend/Utilisateur/shared.html' %}
+{% load staticfiles %}
+{% block page %}
+
+<div class="container" >
+    <div class="text-center" style="height: 75px;position: relative;z-index: 1;width: 240px;margin: auto;">                        
+        <a href="#" class="logo"> <span><img src="{% static 'Soluplus/images/small/logo_text_2.png' %}" alt="" style="width: 216px;"> </span></a>                        
+    </div>                               
+</div>  
+
+<div class="panel panel-color panel-primary panel-pages">
+    <div class="panel-heading" style="background-color: #67c3d8!important;"> 
+        <div class="bg-overlay"></div>
+        <h1 class="text-center m-t-10 text-white" style="font-size: 24px;"> Se connecter au système</h1>
+    </div> 
+    
+    <div class="panel-body">
+        <!-- Appel de la fonction message -->
+        {% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}  
+        
+        <form class="needs-validation form-horizontal m-t-20" id="form" method="POST" action="{% url 'front_post_login' %}">
+            {% csrf_token %}
+            
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <input class="form-control input-lg " name="username" type="text" required placeholder="Nom d'utilisateur">
+                    <div class="invalid-tooltip">
+                        Veuillez saisir le nom d'utilisateur
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="form-control input-lg" name="password" type="password" required="" placeholder="Mot de passe">
+                </div>
+                <div class="invalid-tooltip">
+                    Veuillez saisir le mot de passe
+                </div>
+            </div>
+
+            
+            <div class="form-group text-center m-t-40">
+                <div class="col-xs-12">
+                    <button class="btn btn-success btn-lg w-lg waves-effect waves-light" type="submit">Connexion</button>
+                </div>
+            </div>
+
+            
+        </form> 
+    </div>           
+
+    </div>
+</div>
+
+{% endblock %}

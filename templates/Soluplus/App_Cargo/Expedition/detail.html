@@ -1,0 +1,153 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+
+            <div class="panel-heading">
+                
+                {% if model.etat.id == 1 %}
+                    <a href="{% url 'app_cargo_arrive_expedition' model.id %}" class="btn btn-success waves-effect waves-light">Marquer arrivé</a>    
+                {% endif %}
+                    
+                
+            </div>
+            
+            <div class="panel-body">
+                
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Numéro :</label>
+                        <h2>{{model.numero}}</h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Etat :</label>
+                        <h2>{{model.etat}}</h2>
+                    </div>
+                </div>
+
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Date de création :</label>
+                        <h2>{{model.date_creation}}</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Auteur :</label>
+                        <h2>{{model.auteur}}</h2>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <center> <h3 style="color: red;">Gros Colis</h3> </center>
+                        <table id="" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Colis</th>
+                                    <th>Etat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in lignes %}
+                                    
+                                    {% if item.colis != None %}
+                                        <tr>
+                                            <td> {{ item.colis }}</td>
+                                            <td>{{ item.etat }} </td>
+                                            <td> 
+                                                
+                                                {% if model.etat.id == 1 %}
+                                                    <form action="{% url 'app_cargo_post_cancel_expedition_colis' %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="id" value="{{item.colis.id}}">
+                                                        <input type="hidden" name="exp_id" value="{{model.id}}">
+                                                        <input type="hidden" name="ligne_id" value="{{item.id}}">
+                                                        <button class="btn-danger" type="submit">Annuler</button>
+                                                    </form> 
+                                                {% endif %}
+                                                    
+                                                
+                                            </td>
+                                        </tr>    
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <center> <h3 style="color: red;">Petit Colis</h3> </center>
+                        <table id="" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Groupage</th>
+                                    <th>Colis</th>
+                                    <th>Etat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in lignes %}
+                                    {% if item.groupage != None %}
+                                            
+                                        {% for colis in item.groupage.colis.all %}
+
+                                            <tr>
+                                                <td>{{ item.groupage }}</td>
+                                                <td> {{ colis.numero }} </td>
+                                                <td>{{ item.etat }} </td>
+                                                <td>
+                                                    
+                                                    {% if model.etat.id == 1 %}
+                                                        <form action="{% url 'app_cargo_post_cancel_expedition_colis' %}" method="POST">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="id" value="{{colis.id}}">
+                                                            <input type="hidden" name="exp_id" value="{{model.id}}">
+                                                            <input type="hidden" name="ligne_id" value="{{item.id}}">
+                                                            
+                                                            <button class="btn-danger" type="submit">Annuler</button>
+                                                        </form> 
+                                                    {% endif %}
+                                                        
+                                                   
+                                                </td>
+                                            </tr>
+
+                                            
+                                            
+                                        {% endfor %}
+
+                                        
+                                    {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+
+{% endblock %}

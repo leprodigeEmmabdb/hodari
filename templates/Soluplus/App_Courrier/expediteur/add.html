@@ -1,0 +1,74 @@
+
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+{% load staticfiles %}
+{% block page %}
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}    
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <form class="needs-validation" novalidate method="POST" action="{% url 'app_courrier_post_add_exped' %}"
+                            enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-md-6 form-group" >
+                                    <label for="nom"> Nom </label>
+                                    <input type="text" name="nom" class="form-control"  required>
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <label for="adresse">Adresse</label>
+                                    <input type="text" name="adresse" class="form-control" >
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-md-6 form-group ">
+                                    <label for="Phone">Phone</label>
+                                    <input type="text" name="phone" class="form-control" min="10" max="10">
+                                </div>
+
+                                <div class="col-md-6 form-group ">
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" class="form-control" re>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div>
+                                    <input type="submit" value="Enregistrer" class="btn btn-success" >
+                                </div>
+                            </div>
+                                    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+{% endblock %}

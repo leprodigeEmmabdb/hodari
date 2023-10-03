@@ -1,0 +1,74 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li class="active">Dashboard</li>
+            <li><a href="{% url 'app_recrutement_list_candidats' %}">Accueil</a></li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Candidat {{model.prenom}} - {{model.nom}}
+            </div>
+            <div class="panel-body">
+
+                <div class="row row_formulaire">
+                    <h6 class="affiche_detail">{{model.nom}}</h6>
+                    <div class="col-md-6">
+                            <p>Email: <strong>{{model.email}}</strong></p>
+                            <p>Phone: <strong>{{model.phone}}</strong> </p>
+                            <p>Adresse: <strong>{{model.adresse}}</strong> </p>
+                            <p>profession: <strong>{{model.profession}}</strong> </p>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Date Naissance: <strong>{{model.date_naissance | date:'d/m/Y'}}</strong> </p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <table id="datatable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Reference</th>
+                                <th>Date Inscrite</th>
+                                <th>Offre</th>
+                                <th>Entreprise</th>
+                                <th>Publication</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in model.all_candidature %}
+                            <tr>
+                                <td style="width: 10px;"></td>
+                                <td>{{item.reference}}</td>
+                                <td>{{item.dateinscrit|date:'d/m/Y'}}</td>
+                                <th>{{item.offre.titre}}</th>
+                                <td>{{item.offre.entreprise}}</td>
+                                <td>{{item.offre.datepublish |date:'d/m/Y'}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+
+{% endblock %}

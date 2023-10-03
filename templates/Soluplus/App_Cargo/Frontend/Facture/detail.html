@@ -1,0 +1,272 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+
+{% load separateur %}
+{% load staticfiles %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-heading">
+            <h3 class="panel-title"></h3> 
+            <div class="row">
+                    
+                {% if model.statut.id != 2 %}
+
+                    <form method="POST" action="{% url 'app_vente_pay_facture' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="facture_id" value="{{model.id}}">
+                        
+                        <button type="button" onclick="printDiv()" class="btn btn-inverse waves-effect waves-light m-b-5" style="margin-left: 7px;"><i class="fa fa-print"></i> <span>Imprimer ticket</span></button>
+                    </form>
+                
+                {% elif model.statut.id == 2 %}
+                    
+                    <button type="button" onclick="printDiv()" class="btn btn-inverse waves-effect waves-light m-b-5" style="margin-left: 7px;"><i class="fa fa-print"></i> <span>Imprimer ticket</span></button>
+                {% endif %}
+                
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <!-- <div class="panel-heading">
+                <h4>Invoice</h4>
+            </div> -->
+            <div class="panel-body">
+                <div class="home" style="text-align: center;">
+                    <h2 style="font-size: 12px;">Turkish African Cargo </h2>
+                    <h2 style="font-size: 12px;">FACTURE N°: {{model.numero}}</h2>
+                    <h2 style="font-size: 12px;">Client : {{model.client.nom}}</h2>
+                    <h2 style="font-size: 12px;">Tél. Client : {{model.client.phone}}</h2>
+                    <h2 style="font-size: 12px;">Date : {{model.date | date:'d/m/Y'}}</h2>
+                    
+                    
+                    <div class="card__body">
+                        <table class="table">
+                            <thead>
+                                <th>Numero</th>
+                                <th>Type</th>
+                                <th>Poids</th>
+                            </thead>
+                            
+                            <tbody>
+                                <tr>               
+                                    <td >{{ model.colis.numero }}</td>
+                                    <td> {{model.colis.type.designation}} </td>
+                                    <td > {{model.colis.poids }} {{model.colis.unite.designation}}</td>
+                                    
+                                </tr>        
+                            </tbody>
+                        </table>
+            
+                    </div>
+            
+                    <div class="card__tags">
+                        
+                        <!-- span class="card__tag">xx0012141x001x41</span-->
+            
+            
+                        <p class="text-right" style="font-size: 12px;"><b>Sous-total:</b> {{model.montant_total}} {{model.devise.designation}}</p>
+                        
+                        <hr>
+                        <h3 class="text-right" style="font-size: 12px;">Total : {{model.montant_total}} {{model.devise.designation}}</h3>
+                        
+                        {% for item in paiements %}
+                            <div class="text-right" style="font-size: 10px;"><i class="fa  fa-money"></i> Payé le {{item.date_mvt | date:'d.m.Y'}} <span> : </span> {{item.montant}} {{item.devise.designation}} </div>  
+                        {% endfor %}
+                        
+                        <hr> 
+                        <h2 class="text-right" style="font-size: 12px;">Montant restant : {{model.montant_restant}}</h2>
+
+                        <br>
+                        
+
+                        <br>
+
+                        
+
+                       
+                    </div>
+                    
+                </div>
+            
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Script to print the content of a div -->
+<script>
+    function printDiv() { 
+        var divContents = document.getElementById("GFG").innerHTML; 
+        var a = window.open('', '', 'height=2000, width=500');
+        a.document.write('<html>'); 
+        a.document.write('<body >'); 
+        a.document.write(divContents); 
+        a.document.write('</body></html>'); 
+        a.document.close();
+        a.print(); 
+    } 
+</script>
+
+<div id="GFG" style="background-color: green; display: none;"> 
+    
+    <style>
+        .card {
+            background-color: #fff;
+            width: 100%;
+            float: left;
+            margin-top: 20px;
+            border-radius: 0px;
+            box-sizing: border-box;
+            padding: 80px 0px 0px 0px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            /*border: 1px solid rgba(0, 0, 0, 0.125);*/
+            /*border-radius: 0.25rem;*/
+        }
+
+        .card__msg {
+            text-transform: uppercase;
+            color: #55585b;
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .card__submsg {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 0px;
+        }
+
+        .card__body {
+            background-color: #f8f6f6;
+            /*border-radius: 4px;*/
+            width: 100%;
+            margin-top: 5px;
+            float: left;
+            box-sizing: border-box;
+            font-size: 10px;
+            /*padding: 30px;*/
+        }
+
+        .card__tags {
+            clear: both;
+            padding-top: 15px;
+        }
+
+        
+        table {
+        /*border-collapse:collapse;*/
+        width:100%;
+
+        }
+        th, td {
+        /*border:1px solid black;*/
+        width:fit-content;
+        padding-top:1px;
+        padding-bottom: 1px;
+        text-align:left;
+        font-size: 10px;
+        }
+        td {
+        text-align:left;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        font-size: 10px;
+        }
+        caption {
+        font-weight:bold
+        }
+
+        thead {
+            margin-bottom:  20px;
+            font-size: 10px;
+        }
+    </style>
+
+    <div class="home" style="text-align: center;">
+        <h2 style="font-size: 12px;">Turkish African Cargo </h2>
+        <h2 style="font-size: 12px;">FACTURE N°: {{model.numero}}</h2>
+        <h2 style="font-size: 12px;">Client : {{model.client.nom}}</h2>
+        <h2 style="font-size: 12px;">Tél. Client : {{model.client.phone}}</h2>
+        <h2 style="font-size: 12px;">Date : {{model.date | date:'d/m/Y'}}</h2>
+        
+        
+        <div class="card__body">
+            <table class="table">
+                <thead>
+                    <th>Numero</th>
+                    <th>Type</th>
+                    <th>Poids</th>
+                </thead>
+                
+                <tbody>
+                    <tr>               
+                        <td >{{ model.colis.numero }}</td>
+                        <td> {{model.colis.type.designation}} </td>
+                        <td > {{model.colis.poids }} {{model.colis.unite.designation}}</td>
+                        
+                    </tr>        
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="card__tags">
+            
+            <!-- span class="card__tag">xx0012141x001x41</span-->
+
+
+            <p class="text-right" style="font-size: 12px;"><b>Sous-total:</b> {{model.montant_total}} {{model.devise.designation}}</p>
+            <hr>
+            <h3 class="text-right" style="font-size: 12px;">Total : {{model.montant_total}} {{model.devise.designation}}</h3>
+            
+            {% for item in paiements %}
+                <div class="text-right" style="font-size: 10px;"><i class="fa  fa-money"></i> Payé le {{item.date_mvt | date:'d.m.Y'}} <span> : </span> {{item.montant}} {{item.devise.designation}} </div>  
+            {% endfor %}
+            
+            <hr> 
+            <h2 class="text-right" style="font-size: 12px;">Montant restant : {{model.montant_restant}}</h2>
+
+            <br>
+            
+
+            <br>
+
+
+        
+        </div>
+        
+    </div>
+</div> 
+
+{% endblock %}

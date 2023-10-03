@@ -1,0 +1,59 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <form id="form" method="POST" class="needs-validation" novalidate action="{% url 'app_courrier_arrivee_post_traiter' %}">
+                            {% csrf_token %}
+                            <input id="submit" type="submit" style="display: none">
+                            <input name="ref" type="hidden" value="{{ model.id }}">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="date_traitement" >Date de traitement :</label>
+                                    <div class="input-group">
+                                        <input name="date_traitement" type="text" class="form-control" placeholder="mm/dd/yyyy" id="datepicker" required>
+                                        <div class="invalid-tooltip">
+                                            Veuillez remplir ce champs
+                                        </div>  
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br> <br> <br>
+                            <input type="submit" value="Valider" class="btn btn-success" >
+
+                            <br><br><br><br><br><br><br><br><br><br><br>
+                    
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}

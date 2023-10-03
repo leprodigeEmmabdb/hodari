@@ -1,0 +1,490 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+        <meta name="author" content="Coderthemes">
+
+        <!-- Django disable back to form -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, post-check=0, pre-check=0" />
+        <meta http-equiv="Pragma" content="no-cache" />
+
+        <link rel="shortcut icon" href="{% static 'Soluplus/images/small/gr.gif' %}">
+
+        <title>{{ title }}</title>
+
+        <!-- Base Css Files -->
+
+        <link href="{% static 'Soluplus/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/css/bootstrap.tooltip.validate.form.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/css/chosen.css' %}" rel="stylesheet" />
+
+        <!-- Font Icons -->
+        <link href="{% static 'Soluplus/assets/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/assets/ionicon/css/ionicons.min.css' %} " rel="stylesheet" />
+        <link href="{% static 'Soluplus/css/material-design-iconic-font.min.css' %}" rel="stylesheet">
+
+        <!-- animate css -->
+        <link href="{% static 'Soluplus/css/animate.css' %}" rel="stylesheet" />
+
+        <!-- Waves-effect -->
+        <link href="{% static 'Soluplus/css/waves-effect.css' %}" rel="stylesheet">
+
+        <!-- sweet alerts -->
+        <link href="{% static 'Soluplus/assets/sweet-alert/sweet-alert.min.css' %}" rel="stylesheet">
+
+
+        <!-- Custom Files -->
+        <link href="{% static 'Soluplus/css/helper.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/css/style.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/css/custom.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/css/homecards.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/css/bootstrap-select.css' %}" rel="stylesheet" type="text/css" />
+
+
+
+
+
+        <!-- DataTables -->
+        <link href="{% static 'Soluplus/assets/datatables/jquery.dataTables.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- Plugins css-->
+        <link href="{% static 'Soluplus/assets/tagsinput/jquery.tagsinput.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/assets/toggles/toggles.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/assets/timepicker/bootstrap-timepicker.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/assets/timepicker/bootstrap-datepicker.min.css' %}" rel="stylesheet" />
+        <link href="{% static 'Soluplus/assets/colorpicker/colorpicker.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/assets/jquery-multi-select/multi-select.css' %}"  rel="stylesheet" type="text/css" />
+
+        <link href="{% static 'Soluplus/assets/select2/select2.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'Soluplus/assets/nestable/jquery.nestable.css' %}" rel="stylesheet" type="text/css" />
+
+        <link href="{% static 'Soluplus/assets/modal-effect/css/component.css' %}" rel="stylesheet">
+
+
+
+
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        <link href="{% static 'Soluplus/css/datepicker.css' %}" rel="stylesheet" />
+
+        <script src="{% static 'Soluplus/js/modernizr.min.js' %}"></script>
+        <script src="{% static 'Soluplus/js/jquery.min.js' %}"></script>
+        <script src="{% static 'Soluplus/js/script.js' %}"></script>
+
+
+    </head>
+    <body class="fixed-left">
+
+        <style>
+            body {
+                background: rgba(255, 255, 255, 0.45);
+              }
+              .wrapper {
+                padding-top: 75px;
+              }
+              #valForm input {
+                width: 100%;
+                height: 50px;
+                padding: 5px 20px;
+                margin-bottom: 10px;
+                font-size: 16px;
+              }
+              #valForm select {
+                width: 100%;
+                padding: 5px 20px;
+                margin-bottom: 10px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                height: 50px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+              }
+              form#valForm {
+                padding: 10px;
+              }
+              #valForm .error {
+                border: 3px solid #b94a48 !important;
+                background-color: #fee !important;
+              }
+              #valForm label {
+                display: block;
+                margin-bottom: 10px;
+                color: #1c1c1c;
+              }
+              #valForm .form-group {
+                display: inline-block;
+              }
+              #valForm .btn-primary {
+                width: 100%;
+                height: 50px;
+                border-radius: 0px;
+                font-weight: 400;
+                font-size: 25px;
+                background: #70CCF4;
+                border-color: #fff;
+                margin-bottom: 15px;
+              }
+              #valForm .btn-clear {
+                width: 100%;
+                height: 50px;
+                border-radius: 0px;
+                font-weight: 400;
+                font-size: 25px;
+                background: #C91B08;
+                border-color: #fff;
+                color: #fff;
+                margin-bottom: 15px;
+              }
+              #valForm .tooltip > .tooltip-inner {
+                background-color: #f00;
+              }
+              #valForm .tooltip > .tooltip-arrow {
+                border-top-color: #f00;
+              }
+        </style>
+
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <!-- LOGO -->
+                <div class="topbar-left">
+                    <div class="text-center">
+
+                        <a href="{% url 'index' %}" class="logo">
+                          <span>
+                            <img src="/static/job_space/img/logo (1).png" height="10%" width="25%" alt="">
+                          </span>
+                        </a>
+
+                    </div>
+
+                </div>
+                <!-- Button mobile view to collapse sidebar menu -->
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <div class="">
+
+                          <div class="pull-left hidden-md hidden-lg">
+                            <button class="button-menu-mobile open-left">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <span class="clearfix"></span>
+
+                          </div>
+
+                            <div class="pull-left hidden-xs">
+                                <div class="button-menu-mobile">
+                                    {% for item in modules %}
+                                        <a class="menu_module {% if item.order == module %}menu_active{% endif %}" style="font-size: 17px; color: white; margin-right: 10px;" href="{% url item.url %}" > {{item.designation}} </a>
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+
+
+
+
+                            <ul class="nav navbar-nav navbar-right pull-right">
+
+                                <li class="hidden-xs">
+                                    <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="md md-crop-free"></i></a>
+                                </li>
+                                <li class="hidden-xs">
+                                    <a href="#" class="waves-effect waves-light" >
+                                        <i class="md md-notifications"></i> <span id="not" class="badge badge-xs badge-danger">0</span>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="{% static 'Soluplus/images/avatar-1.png' %}" alt="user-img" class="img-circle"> </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="{% url 'logout' %}"><i class="md md-settings-power"></i> Déconnexion</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- Top Bar End -->
+
+
+            {% block menu %}
+
+            {% endblock menu %}
+
+
+            {% block page2 %}
+
+            {% endblock page2 %}
+
+
+        </div>
+        <!-- END wrapper -->
+
+
+    	<script>
+            var resizefunc = [];
+        </script>
+
+        <!-- jQuery  -->
+
+        <script src="{% static 'Soluplus/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'Soluplus/js/waves.js' %}"></script>
+        <script src="{% static 'Soluplus/js/wow.min.js' %}"></script>
+        <script src="{% static 'Soluplus/js/jquery.nicescroll.js' %}" type="text/javascript"></script>
+        <script src="{% static 'Soluplus/js/jquery.scrollTo.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/chat/moment-2.2.1.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/jquery-sparkline/jquery.sparkline.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/jquery-detectmobile/detect.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/fastclick/fastclick.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/jquery-slimscroll/jquery.slimscroll.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/jquery-blockui/jquery.blockUI.js' %}"></script>
+
+        <!-- sweet alerts -->
+        <script src="{% static 'Soluplus/assets/sweet-alert/sweet-alert.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/sweet-alert/sweet-alert.init.js' %}"></script>
+
+        <!-- flot Chart -->
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.time.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.tooltip.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.resize.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.pie.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.selection.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.stack.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/flot-chart/jquery.flot.crosshair.js' %}"></script>
+
+        <!-- Counter-up -->
+        <script src="{% static 'Soluplus/assets/counterup/waypoints.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'Soluplus/assets/counterup/jquery.counterup.min.js' %}" type="text/javascript"></script>
+
+        <!-- skycons -->
+        <script src="{% static 'Soluplus/js/skycons.min.js' %}" type="text/javascript"></script>
+
+        <!-- Modal-Effect -->
+        <script src="{% static 'Soluplus/assets/modal-effect/js/classie.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/modal-effect/js/modalEffects.js' %}"></script>
+
+        <!-- CUSTOM JS -->
+        <script src="{% static 'Soluplus/js/jquery.app.js' %}"></script>
+        <script src="{% static 'Soluplus/js/bootstrap-select.js' %}"></script>
+
+
+        <script src="{% static 'Soluplus/assets/datatables/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/datatables/dataTables.bootstrap.js' %}"></script>
+
+        <script src="{% static 'Soluplus/assets/tagsinput/jquery.tagsinput.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/toggles/toggles.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/timepicker/bootstrap-timepicker.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/timepicker/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/select2/select2.min.js' %}" type="text/javascript"></script>
+
+        <script type="text/javascript" src="{% static 'Soluplus/assets/colorpicker/bootstrap-colorpicker.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Soluplus/assets/jquery-multi-select/jquery.multi-select.js' %}"></script>
+        <script type="text/javascript" src="{% static 'Soluplus/assets/jquery-multi-select/jquery.quicksearch.js' %}"></script>
+
+
+        <script src="{% static 'Soluplus/js/chosen.jquery.js' %}"></script>
+        <script src="{% static 'Soluplus/js/chosen-init.js' %}"></script>
+
+        <!-- Dashboard -->
+        <script src="{% static 'Soluplus/js/jquery.dashboard.js' %}"></script>
+
+        <!-- Chat -->
+        <script src="{% static 'Soluplus/js/jquery.chat.js' %}"></script>
+
+        <!-- Todo -->
+        <script src="{% static 'Soluplus/js/jquery.todo.js' %}"></script>
+
+        <!--form validation-->
+        <script type="text/javascript" src="{% static 'Soluplus/assets/jquery.validate/jquery.validate.min.js' %}"></script>
+
+        <!--form validation init-->
+        <script src="{% static 'Soluplus/assets/jquery.validate/form-validation-init.js' %}"></script>
+
+        <!--form tooltip init-->
+        <script src="{% static 'Soluplus/js/popper.min.js' %}"></script>
+
+        <script src="{% static 'Soluplus/js/datepicker.js' %}"></script>
+        <script src="{% static 'Soluplus/js/datepicker.fr-FR.js' %}"></script>
+        <script src="{% static 'Soluplus/js/main.js' %}"></script>
+
+        <script src="{% static 'Soluplus/js/fourniture-local.js' %}"></script>
+
+        <!--nestle-->
+        <script src="{% static 'Soluplus/assets/nestable/jquery.nestable.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/nestable/nestable.js' %}"></script>
+
+        <!-- EASY PIE CHART JS -->
+        <script src="{% static 'Soluplus/assets/easypie-chart/easypiechart.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/easypie-chart/jquery.easypiechart.min.js' %}"></script>
+        <script src="{% static 'Soluplus/assets/easypie-chart/example.js' %}"></script>
+
+
+        <script src="{% static 'Soluplus/js/zxhing.js' %}"></script>
+
+        <script type="text/javascript">
+            /* ==============================================
+            Counter Up
+            =============================================== */
+            jQuery(document).ready(function($) {
+                $('.counter').counterUp({
+                    delay: 100,
+                    time: 1200
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+          $(document).ready(function() {
+              $('#datatable').dataTable();
+              $('#datatable2').dataTable();
+          } );
+        </script>
+
+
+        <script>
+            jQuery(document).ready(function() {
+
+                // Tags Input
+                jQuery('#tags').tagsInput({width:'auto'});
+
+                // Form Toggles
+                jQuery('.toggle').toggles({on: true});
+
+                // Time Picker
+                jQuery('#timepicker').timepicker({defaultTIme: false});
+                jQuery('#timepicker2').timepicker({showMeridian: false});
+                jQuery('#timepicker3').timepicker({minuteStep: 15});
+
+                // Date Picker
+                jQuery('#datepicker').datepicker();
+                jQuery('#datepicker-inline').datepicker();
+                jQuery('#datepicker-multiple').datepicker({
+                    numberOfMonths: 3,
+                    showButtonPanel: true
+                });
+
+                 // Select2
+                jQuery(".select2").select2({
+                    width: '100%'
+                });
+
+            });
+        </script>
+
+        <script>
+            (function() {
+              'use strict';
+              window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+
+                var validation = Array.prototype.filter.call(forms, function(form){
+                  form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() == false ) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                  }, false);
+                });
+              }, false);
+            })();
+
+        </script>
+
+
+<script>
+    // SELECT BOOTSTRAP JS
+    function createOptions(number) {
+      var options = [], _options;
+
+      for (var i = 0; i < number; i++) {
+        var option = '<option value="' + i + '">Option ' + i + '</option>';
+        options.push(option);
+      }
+
+      _options = options.join('');
+
+      $('#number')[0].innerHTML = _options;
+      $('#number-multiple')[0].innerHTML = _options;
+
+
+      $('#number2')[0].innerHTML = _options;
+      $('#number2-multiple')[0].innerHTML = _options;
+    }
+
+    var mySelect = $('#first-disabled2');
+
+    createOptions(4000);
+
+    $('#special').on('click', function () {
+      mySelect.find('option:selected').prop('disabled', true);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#special2').on('click', function () {
+      mySelect.find('option:disabled').prop('disabled', false);
+      mySelect.selectpicker('refresh');
+    });
+
+    $('#basic2').selectpicker({
+      liveSearch: true,
+      maxOptions: 1
+    });
+    </script>
+    </body>
+    </html>
+
+<script>
+    // PICTUREEEEEEEEEEEEEEEE
+      $(".imgAdd").click(function(){
+    $(this).closest(".row").find('.imgAdd').before('<div class="col-sm-2 imgUp"><div class="imagePreview"></div><label class="btn btn-primary">Upload<input type="file" class="uploadFile img" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;"></label><i class="fa fa-times del"></i></div>');
+  });
+  $(document).on("click", "i.del" , function() {
+    $(this).parent().remove();
+  });
+  $(function() {
+      $(document).on("change",".uploadFile", function()
+      {
+          var uploadFile = $(this);
+          var files = !!this.files ? this.files : [];
+          if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+          if (/^image/.test( files[0].type)){ // only image file
+              var reader = new FileReader(); // instance of the FileReader
+              reader.readAsDataURL(files[0]); // read the local file
+
+              reader.onloadend = function(){ // set image data as background of div
+                  //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+  uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+              }
+          }
+
+      });
+  });
+  </script>
+
+
+	</body>
+</html>

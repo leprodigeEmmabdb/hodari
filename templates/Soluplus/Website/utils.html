@@ -1,0 +1,240 @@
+{% load  staticfiles %}
+<!DOCTYPE html>
+<html class="background-100-e">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>{{title}}</title>
+		<meta name="description" content="Le cabinet Hodari qui tire son nom du swahili et dont le nom signifie « courage », « bravoure » est l’aboutissement professionnel d’une femme congolaise audacieuse, ambitieuse et déterminée." />
+		<meta name="keywords" content="Hodari, Ressources humaines, Kinshasa" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="{% static 'Website/bower_components/fontawesome/css/font-awesome.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bower_components/animate.css/animate.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bower_components/minicolors/jquery.minicolors.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bower_components/slick.js/slick/slick.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bower_components/slick.js/slick/slick-theme.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bootstrap/dist/css/bootstrap-custom.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/bootstrap/dist/css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/lib/linecons/style.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/styles/style.min.css' %}" />
+		<link rel="stylesheet" href="{% static 'Website/theme-custom.css' %}" />
+		<link rel="shortcut icon" href="{% static 'Website/logo.png' %}" type="image/x-icon" />
+		<link rel="apple-touch-icon" href="{% static 'Website/logo.png' %}" />
+		<link rel="stylesheet" href="{% static 'Website/' %}" />
+		
+	</head>
+	<body class="state1 background-100-e">
+		<div class="ext-nav background-95-h page-transition">
+			<div class="view half-height">
+				<img alt class="bg static" src="{% static 'Website/images/HODARI.jpg' %}" />
+				<div class="content no-top-padding no-bottom-padding  full-height">
+					<div class="container-fluid  full-height">
+						<div class="row full-height">
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="page-border bottom colors-e background-solid"><a href="#top" class="hover-effect">To <span class="highlight">Top</span></a></div>
+		<div class="page-border left colors-e background-solid">
+			<ul>
+				<li><a href="https://web.facebook.com/Hodari-109955807848896/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.linkedin.com/company/73224868" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+			</ul>
+		</div>
+		
+		<div class="page-border right colors-e background-solid"></div>
+		<nav class="navbar navbar-default navbar-fixed-top page-transition colors-e background-solid" role="navigation" id="top-nav">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="menu-toggle ext-nav-toggle visible-xs-block" data-target=".ext-nav" href="#"><span></span></a>
+					<a class="menu-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" href="#"><span></span></a>
+					<img class="navbar-brand" src="{% static 'Website/images/logo.png' %}" alt="" style="width: auto;height: 101px;">
+				</div>
+				<div class="collapse navbar-collapse" style="padding-top: 10px;">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="{% url 'website_index' %}" class="hover-effect active">Accueil</a></li>
+						<li><a href="{% url 'website_about' %}" class="hover-effect">A propos</a></li>
+						<li><a href="{% url 'website_valeur' %}" class="hover-effect">Nos Valeurs</a></li>
+						<li><a href="{% url 'website_mission' %}" class="hover-effect">Mission</a></li>
+						<li><a href="{% url 'website_recrutement' %}" class="hover-effect">Recrutement</a></li>
+						<li><a href="{% url 'website_contact' %}" class="hover-effect">Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<ul id="dot-scroll" class="colors-e background-solid"></ul>
+		<div class="overlay-window gallery-overlay colors-g background-95-g" data-overlay-zoom="#work .content">
+			<div class="overlay-control background-90-b">
+				<a class="previos" href="#"></a>
+				<a class="next" href="#"></a>
+				<a class="cross" href="#"></a>
+			</div>
+			<div class="overlay-view"></div>
+			<ul class="loader">
+				<li class="background-highlight-e"></li>
+				<li class="background-highlight-e"></li>
+				<li class="background-highlight-e"></li>
+			</ul>
+		</div>
+		<div class="overlay-window map-overlay colors-h background-75-h">
+			<div class="overlay-control background-90-g">
+				<a class="cross" href="#"></a>
+			</div>
+			<div class="overlay-view">
+				<div class="map-canvas" data-latitude="42.487606" data-longitude="-71.115661" data-zoom="14">
+					<div class="map-marker" data-latitude="42.487606" data-longitude="-71.115661" data-text="Our awesome location"></div>
+					<div class="map-marker" data-latitude="42.485100" data-longitude="-71.113256" data-text="Our sales office"></div>
+				</div>
+			</div>
+		</div>
+		<div class="overlay-window credits-overlay colors-g background-95-g">
+			<div class="overlay-control background-90-b">
+				<a class="cross" href="#"></a>
+			</div>
+			
+		</div>
+		<div class="gate colors-e background-solid">
+			<div class="gate-bar background-heading-e"></div>
+			<ul class="loader">
+				<li class="background-heading-e"></li>
+				<li class="background-heading-e"></li>
+				<li class="background-heading-e"></li>
+			</ul>
+		</div>
+		
+		{% block page %}
+        {% endblock %}		
+
+		<footer class="colors-g page-transition non-preloading">
+			<div class="container scroll-in-animation" data-animation="fadeInDown">
+				<div class="row">
+					<div class="col-md-3">
+						<h4><span class="highlight">HODARI</span></h4>
+					
+						<p class="social-links">
+							<a target="_blank" href="https://web.facebook.com/Hodari-109955807848896/"><i class="fa fa-facebook"></i></a>
+							<a target="_blank" href="https://www.linkedin.com/company/73224868"><i class="fa fa-linkedin"></i></a>
+						</p>
+					</div>
+				
+				</div>
+			</div>
+			<div class="bottom text-center background-5-b">
+				© 2020 Developpé par <a href="https://soluplus.tech/" class="heading" >Soluplus Tech</a>
+			</div>
+		</footer>
+		
+		<script>
+		if (typeof(atob) == "undefined")
+		{
+			document.write('<script src="{% static '' %}Website/lib/stringencoders-v3.10.3/javascript/base64.js"><\/script>');
+			var atob = function(x)
+			{
+				return base64.decode(x);
+			}
+		}
+		</script>
+		<script src="{% static 'Website/bower_components/less.js/dist/less.min.js' %}"></script>
+		<script src="{% static 'Website/bower_components/jquery/dist/jquery.min.js' %}"></script>
+		<script src="{% static 'Website/lib/tween/tween.min.js' %}"></script>
+		<script src="{% static 'Website/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'Website/bootstrap/dist/js/main.js' %}"></script>
+		<script src="{% static 'Website/bower_components/modernizr/modernizr.js' %}"></script>
+		<script src="{% static 'Website/lib/SmoothScroll-1.2.1/SmoothScroll.js' %}"></script>
+		<script src="{% static 'Website/bower_components/jquery-cookie/jquery.cookie.js' %}"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script src="{% static 'Website/bower_components/jqBootstrapValidation/dist/jqBootstrapValidation-1.3.7.min.js' %}"></script>
+		<script src="{% static 'Website/bower_components/minicolors/jquery.minicolors.min.js' %}"></script>
+		<script src="{% static 'Website/bower_components/slick.js/slick/slick.min.js' %}"></script>
+		<script src="{% static 'Website/bower_components/shufflejs/dist/jquery.shuffle.min.js' %}"></script>
+		<script src="{% static 'Website/bower_components/textillate/assets/jquery.lettering.js' %}"></script>
+		<script src="{% static 'Website/bower_components/textillate/assets/jquery.fittext.js' %}"></script>
+		<script src="{% static 'Website/bower_components/textillate/jquery.textillate.js' %}"></script>
+		<script src="{% static 'Website/lib/prism/prism.js' %}"></script>
+		<script>
+		(function()
+		{
+			var disableMobileAnimations = true;
+			var isWin = navigator.appVersion.indexOf("Win") !== -1;
+			if (isWin) $('html').addClass('win');
+			var ua = navigator.userAgent.toLowerCase();
+			var isChrome = ua.indexOf('chrome') > -1;
+			if (isChrome) $('html').addClass('chrome');
+			var isAndroidBrowser4_3minus = ((ua.indexOf('mozilla/5.0') > -1 && ua.indexOf('android ') > -1 && ua.indexOf('applewebkit') > -1) && !(ua.indexOf('chrome') > -1));
+			if (isAndroidBrowser4_3minus) $('html').addClass('android-browser-4_3minus');
+			var isSafari = !isChrome && ua.indexOf('safari') !== -1;
+			if (isSafari) $('html').addClass('safari');
+			var isMobile = Modernizr.touch;
+			if (isMobile)
+			{
+				$('html').addClass('mobile');
+				if (disableMobileAnimations) $('html').addClass('poor-browser');
+			}
+			else
+			{
+				$('html').addClass('non-mobile');
+			}
+			if (isWin && isSafari)
+			{
+				$('html').addClass('flat-animation');
+			}
+		})();
+		</script>
+		<script src="{% static 'Website/scripts/script-bundle.js' %}"></script>
+		<script>
+		if (Function('/*@cc_on return document.documentMode===9@*/')())
+		{
+			$('html').addClass('ie9');
+		}
+		if (Function('/*@cc_on return document.documentMode===10@*/')())
+		{
+			$('html').addClass('ie10');
+		}
+		if (!!navigator.userAgent.match(/Trident.*rv\:11\./))
+		{
+			$('html').addClass('ie11');
+		}
+		</script>
+
+		<script type="text/javascript">
+			function sendEmail() {
+				var name = $("#name");
+				var email = $("#email");
+				var subject = $("#subject");
+				var body = $("#body");
+
+				if (isNotEmpty(name) && isNotEmpty(email) && isNotEmpty(subject) && isNotEmpty(body)) {
+					$.ajax({
+					url: 'sendEmail.php',
+					method: 'POST',
+					dataType: 'json',
+					data: {
+						name: name.val(),
+						email: email.val(),
+						subject: subject.val(),
+						body: body.val()
+					}, success: function (response) {
+							$('#myForm')[0].reset();
+							$('.sent-notification').text("Message envoyé avec succès.");
+					}
+					});
+				}
+			}
+
+			function isNotEmpty(caller) {
+				if (caller.val() == "") {
+					caller.css('border', '1px solid red');
+					return false;
+				} else
+					caller.css('border', '');
+
+				return true;
+			}
+		</script>
+
+	</body>
+</html>

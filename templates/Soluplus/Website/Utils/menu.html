@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<header id="header" id="home">
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+          <div id="logo">
+            <a href="https://hodari.cd/"><img src="{% static 'FrontRecrutment/job_space/img/logo (1).png' %}" style="width: auto;height: 80px;" alt="" title="" /></a>
+          </div>
+          <nav id="nav-menu-container">
+            <ul class="nav-menu">
+              <li class="menu-active"><a href="{% url 'website_index' %}">Accueil</a></li>
+              <li><a href="{% url 'website_about' %}">A propos</a></li>
+              <li><a href="{% url 'website_valeur' %}">Nos valeurs</a></li>
+              <li><a href="{% url 'website_mission' %}">Mission</a></li>
+              <li><a href="{% url 'website_recrutement' %}">Recrutement</a></li>
+              <li><a href="{% url 'website_contact' %}">Contact</a></li>
+              
+            </ul>
+          </nav><!-- #nav-menu-container -->
+        </div>
+    </div>
+  </header><!-- #header -->

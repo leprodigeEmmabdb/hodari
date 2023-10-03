@@ -1,0 +1,314 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+{% load staticfiles %}
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'front_index' %}">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+
+            <div class="panel-heading">
+                {% if model.etat.id == 5 %}
+                    <a href="{% url 'front_add_livraison' model.id %}" class="btn btn-success waves-effect waves-light m-b-5"> <span>Livrer</span> </a>
+                {% elif model.etat.id == 3 %}
+                    <a href="{% url 'front_arrive_colis' model.id %}" class="btn btn-success waves-effect waves-light m-b-5"> <span>Réceptionner</span> </a>
+                {% elif model.etat.id == 1 or model.etat.id == 2 %}
+                    <button type="button" onclick="printTicket()" class="btn btn-inverse waves-effect waves-light m-b-5" style="margin-left: 7px;"><i class="fa fa-print"></i> <span>Imprimer ticket</span></button>
+                {% endif %}
+                {% if model == 0 %}
+                    <a href="{% url 'front_index' %}" class="btn btn-default waves-effect waves-light m-b-5"> <span>Retour</span> </a>
+                {% endif %}
+            </div>
+            
+            <div class="panel-body">
+                {% if model == 0 %}
+                <div class="header text-center">
+                    <i style="font-size: 128px; color: red;" class="glyphicon glyphicon-remove-circle"></i>
+                    <h1>Le numéro du colis scanné n'est pas valide</h1>
+                </div>
+                {% else %}
+                {% if result == 1 %}                   
+                    <br><div class="header text-center">
+                        <i style="font-size: 100px; color: green;" class="glyphicon glyphicon-ok-circle"></i>
+                    </div><br>
+                {% endif %}
+                
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="numero" class="control-label">Numéro :</label>
+                        <h2>{{model.numero}}</h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="client" class="control-label">Client :</label>
+                        <h2>{{model.client}}</h2>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="type" class="control-label">Type :</label>
+                        <h2>{{model.type}}</h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="etat" class="control-label">Etat :</label>
+                        <h2>{{model.etat}}</h2>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="poids" class="control-label">Poids :</label>
+                        <h2>{{model.poids}} {{model.unite}}</h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Montant :</label>
+                        <h2>{{model.montant}}</h2>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="provenance" class="control-label">Provenance :</label>
+                        <h2>{{model.provenance}} </h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="destination" class="control-label">Destination :</label>
+                        <h2>{{model.destination}}</h2>
+                    </div>
+                </div>
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="recepteur" class="control-label">Recepteur :</label>
+                        <h2>{{model.recepteur}} </h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="auteur" class="control-label">Auteur :</label>
+                        <h2>{{model.auteur}}</h2>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+
+
+<!-- Script to print the content of a div -->
+<script>
+
+
+    // QR CODE
+    // Set Size to Match User Input
+    //$('#qrcode').css({
+    //'width' : $('.qr-size').val(),
+    //'height' : $('.qr-size').val()
+    //})
+    // Generate and Output QR Code
+    $('#qrcode1').qrcode({width: $('.qr-size').val(),height: $('.qr-size').val(),text: $('.qr-url').val()});
+        
+    function printDiv() { 
+        var divContents = document.getElementById("GFG").innerHTML; 
+        var a = window.open('', '', 'height=2000, width=500');
+        a.document.write('<html>'); 
+        a.document.write('<body >'); 
+        a.document.write(divContents); 
+        a.document.write('</body></html>'); 
+        a.document.close();
+        a.print(); 
+    } 
+
+    function printTicket() {
+        //var restorePage = document.body.innerHTML;
+        var height = document.getElementById("GFG").offsetHeight;
+        //console.log("HEIGHT : " + height);
+        var printticket = document.getElementById("GFG").innerHTML;
+        /*var ticket = $("#content_ticket");
+        ticket.css("width", "2268px");
+        ticket.css("font-size", "100%");*/
+        document.body.innerHTML = printticket;
+        //document.body.innerHTML = ticket;
+        window.resizeTo(380, height);
+        window.print();
+        document.body.innerHTML = restorePage;
+        $(location).attr("href", "{% url 'app_cargo_detail_colis' model.id %}");
+    }
+    
+</script>
+
+<div id="GFG" style="display: none;"> 
+    
+    <style>
+        .card {
+            background-color: #fff;
+            width: 100%;
+            float: left;
+            margin-top: 20px;
+            border-radius: 0px;
+            box-sizing: border-box;
+            padding: 80px 0px 0px 0px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            /*border: 1px solid rgba(0, 0, 0, 0.125);*/
+            /*border-radius: 0.25rem;*/
+        }
+
+        .card__msg {
+            text-transform: uppercase;
+            color: #55585b;
+            font-size: 10px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .card__submsg {
+            color: #fff;
+            font-size: 10px;
+            font-weight: 400;
+            margin-top: 0px;
+        }
+
+        .card__body {
+            background-color: #f8f6f6;
+            /*border-radius: 4px;*/
+            width: 100%;
+            margin-top: 5px;
+            float: left;
+            box-sizing: border-box;
+            font-size: 10px;
+            /*padding: 30px;*/
+        }
+
+        .card__tags {
+            clear: both;
+            padding-top: 15px;
+        }
+
+        
+        table {
+        /*border-collapse:collapse;*/
+        width:100%;
+
+        }
+        th, td {
+        /*border:1px solid black;*/
+        width:fit-content;
+        padding-top:1px;
+        padding-bottom: 1px;
+        text-align:left;
+        font-size: 10px;
+        }
+        td {
+        text-align:left;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        font-size: 10px;
+        }
+        caption {
+        font-weight:bold
+        }
+
+        thead {
+            margin-bottom:  20px;
+            font-size: 10px;
+        }
+        
+
+        #qrcode1{
+            display: block !important;
+        }
+    </style>
+
+
+
+    <div class="home" style="text-align: center;">
+        <h2 style="font-size: 12px;">Turkish African Cargo</h2>
+        <h2 style="font-size: 12px;">Colis N°: {{model.numero}}</h2>
+        <h2 style="font-size: 12px;">Client : {{model.client.nom}}</h2>
+        <h2 style="font-size: 12px;">Tél. Client : {{model.client.phone}}</h2>
+        <h2 style="font-size: 12px;">Date : {{model.date_creation | date:'d/m/Y'}}</h2>
+        
+        <br>
+
+        <h2 style="font-size: 12px;">Provenance : {{model.provenance.designation}}</h2>
+        <h2 style="font-size: 12px;">Destination : {{model.destination.designation}}</h2>
+        <h2 style="font-size: 12px;">Recepteur : {{model.recepteur}}</h2>
+        <h2 style="font-size: 12px;">Tél. recepteur : {{model.tel_recepteur}}</h2>    
+        
+        <br> <br>       
+        <center>
+                <!-- QR Code-->
+            <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+            <input type="hidden" id="text" class="qr-url" value="{{ model.numero}}">
+        </center>
+        <br>
+
+        <h2 style="font-size: 35px;">{{model.poids}} {{model.unite.designation}}</h2>
+        
+    </div>
+
+    <script src="{% static 'Soluplus/js/jquery.min.js' %}"></script>
+    <script src="{% static 'Soluplus/js/qrcode.js' %}"></script>
+
+    <script type="text/javascript">
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 100,
+            height : 100
+        });
+        
+        function makeCode () {		
+            var elText = document.getElementById("text");
+            
+            if (!elText.value) {
+                alert("Input a text");
+                elText.focus();
+                return;
+            }
+            
+            qrcode.makeCode(elText.value);
+        }
+        
+        makeCode();
+        
+        $("#text").
+            on("blur", function () {
+                makeCode();
+            }).
+            on("keydown", function (e) {
+                if (e.keyCode == 13) {
+                    makeCode();
+                }
+            });
+    </script>
+    
+</div> 
+
+{% endblock %}

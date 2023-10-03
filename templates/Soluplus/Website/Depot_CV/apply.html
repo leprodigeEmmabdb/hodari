@@ -1,0 +1,217 @@
+{% extends 'Soluplus/Website/Utils/main.html' %}
+{% load static %}
+
+{% block page %}   
+
+        <!-- Start post Area -->
+        <section class="post-area section-gap">
+            <div class="container">
+                {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-danger">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success">
+                                <a class="close" data-dismiss="alert">×</a>
+                                {{ message }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                <div class="row justify-content-center d-flex">
+                    <div class="col-lg-8 post-list">
+                        <h3 class="mb-30">Vos Informations</h3>
+                        <form action="{% url 'website_post_apply_depot' %}" class="needs-validation" novalidate method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="nom" placeholder="Nom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom'" required class="single-input form-control">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="postnom" placeholder="PostNom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'PostNom'" required  class="single-input form-control">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                <input type="text" name="prenom" placeholder="Prenom" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Prenom'"  class="single-input form-control">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                <input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" required class="single-input form-control">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <input type="tel" name="tel" id="phone" placeholder="Téléphone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'phone'" required class="single-input form-control phonecd">
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-thumb-tack" aria-hidden="true"></i></div>
+                                <select id="domaine_id" required class="single-input form-control" style="height:40px" onChange="select_domaine_activite()">
+                                    <option value="">Veuillez séléctionner un domaine d'activité</option>
+                                    {% for i in domaines %}
+                                        <option value="{{i.id}}"> {{i.designation}} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                <select id="profession_id" name="profession_id" class="single-input form-control" style="height:40px" required>
+                                    <option value="">Veuillez séléctionner une profession</option>
+                                </select>
+                            </div>
+                            <br> <br>
+                            <div class="d-flex">
+                                <p style="text-align: left;font-size:17px;font-weight:800;">
+                                    JOIGNEZ VOTRE CV ICI</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Upload  -->
+                                    <div id="file-upload-form" class="uploader">
+                                        <input id="file-upload" class="form-control" type="file" name="fileUpload"/ required>
+
+                                        <label for="file-upload" id="file-drag">
+                                            <img id="file-image" src="#" alt="Preview" class="hidden">
+                                            <div id="start">
+                                            <i class="fa fa-download" aria-hidden="true"></i>
+                                            <div>Attacher un CV ici.</div>
+                                            <div id="notimage" class="hidden">Please select an image</div>
+                                            <span id="file-upload-btn" class="btn btn-primary">Séléctionner un CV en Pdf</span>
+                                            </div>
+                                            <div id="response" class="hidden">
+                                            <div id="messages"></div>
+                                            <progress class="progress" id="file-progress" value="0">
+                                                <span>0</span>%
+                                            </progress>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br><br>
+                            <div class="card">
+                                <div class="card-header">
+                                    <p style="text-align:left;font-size:17px;font-weight:800;">DIPLOMES ET BREVETS</p>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered table-responsive">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col" width="10%">#</th>
+                                            <th scope="col" width="80%">Diplomes</th>
+                                            <th scope="col" width="10%"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="items">
+                                          <tr id="ligne1">
+                                            <th scope="row">1</th>
+                                            <td>
+                                                <input type="file" name="diplome" id="diplome1" class="form-control" required/>
+                                            </td>
+                                            <td align="center">
+                                                <i class="fa fa-trash text-danger delete" onclick="supprimerLigne(1)"></i>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+
+                                      <br>
+                                      <section class="button-area">
+                                        <div class="button-group-area mt-10">
+                                            <a id="btnAjouterLigne" class="btn btn-success genric-btn success-border">Ajouter un diplome</a>
+                                        </div>
+                                      </section>
+                                </div>
+                            </div>
+                            <br> <br> <br>
+
+                            <div class="form-group">
+                                <div class="col-lg-offset-1 col-lg-11">
+                                    <button class="btn btn-success waves-effect waves-light" type="submit">Enregistrer</button>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <button class="btn btn-default waves-effect" type="button">Annuler</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 sidebar">
+                        <div class="single-slidebar">
+                            <h4>Recentes Publications</h4>
+                            <div class="active-relatedjob-carusel">
+                                {% for item in recente %}
+                                <div class="single-rated">
+                                    <img class="img-fluid" src="{% static 'FrontRecrutment/job_space/img/work.png' %}" alt="">
+                                    <a href="{% url 'website_item_offre' item.id %}"><h4>{{item.titre}}</h4></a>
+                                    <h6>Publié: {{item.datepublish| date:'d/m/Y'}}</h6>
+                                    <p class="limiteDescrib">
+                                        {{item.description}}
+                                    </p>
+                                    <h5>Entreprise:{{item.entreprise}}</h5>
+                                    <p><span class="lnr lnr-map"></span> Lieu: {{item.localisation}}</p>
+                                    <p class="address"><span class="lnr lnr-pushpin"></span> Contrat: {{item.typecontrat}}</p>
+                                    <p class="address"><span class="lnr lnr-calendar-full"></span> Fin: {{item.dateclose| date:'d/m/Y'}}</p>
+                                    <a href="{% url 'website_item_offre' item.id %}" class="btns text-uppercase">Voir Plus</a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End post Area -->
+
+    <script>
+        var nombreLignes = 1;
+        var compteur = 1;
+
+         $("#btnAjouterLigne").on("click", function () {
+             nombreLignes++;
+             compteur++;
+             var nouvelleLigne = '<tr id="ligne' + compteur + '"><th scope="row">' + compteur + '</th><td>';
+                 nouvelleLigne += '<input type="file" name="diplome" id="designation'+ compteur +'" class="form-control" required/></td>';
+                 nouvelleLigne += '<td align="center">';
+                 nouvelleLigne += '<i class="fa fa-trash text-danger delete" onclick="supprimerLigne(' + compteur + ')"></i>';
+                 nouvelleLigne += '</td></tr>'
+
+
+             $("#items").append(nouvelleLigne);
+        });
+
+
+        function supprimerLigne(indice) {
+             nombreLignes--;
+             $("#ligne" + indice).remove();
+         }
+     </script>
+
+    <script>
+        function select_domaine_activite(){
+            domaine_id = $("#domaine_id").val();
+            select_poste = $("#profession_id");
+            select_poste.find('option')
+            .remove()
+            .end()
+            .append('<option value="">Veuillez séléctionner une profession</option>');
+
+            $.get(
+                "{% url 'ajax_get_poste_recrutement' %}",
+                { 
+                    domaine_id : domaine_id,
+                },
+                function (response) {
+                    for (var i = 0; i < response.length; i++) {
+                        var result = response[i];
+                        
+                        tbody = '<option value = "'+ result.id +'" >' + result.designation + '</option>';
+                        select_poste.append(tbody);
+                    }
+                },
+                "json"
+            );
+        }
+        
+    </script>
+
+{% endblock %}

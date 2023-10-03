@@ -1,0 +1,86 @@
+{% extends 'Soluplus/MainApp/Utils/shared_home_front.html' %}
+
+{% load staticfiles %}
+{% block menu %}
+        
+    <!-- ========== Left Sidebar Start ========== -->
+    <div class="left side-menu">
+        <div class="sidebar-inner slimscrollleft" >
+            <div class="user-details">
+                <div class="pull-left">
+                    <img src="{% static 'Soluplus/images/avatar-1.png' %}" alt="" class="thumb-md img-circle">
+                </div>
+                <div class="user-info">
+                    <div class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{user}} <!--span class="caret"></span--></a>
+                        <!--ul class="dropdown-menu">
+                            <li><a href="{% url 'front_logout' %}"><i class="md md-settings-power"></i> Déconnexion</a></li>
+                        </ul-->
+                    </div>
+                    
+                    <p class="text-muted m-0">{{user__user.nom}}</p>
+                </div>
+            </div>
+            <!--- Divider -->
+            <div id="sidebar-menu">
+                
+                <ul>
+                    <li>
+                        <a href="{% url 'front_index' %}" ><i class="mdi mdi-contact-mail-outline"></i><span style="color : #1479a7;"> Accueil </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_colis' %}" ><i class="mdi mdi-contact-mail-outline"></i><span style="color : #1479a7;"> Colis </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_groupage' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Groupage </span></a>
+                    </li> 
+                    <li>
+                        <a href="{% url 'front_list_expedition' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Expéditions </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_livraison' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Mes livraisons </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_facture' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Factures </span></a>
+                    </li>
+                    <li>
+                        <a href="{% url 'front_list_client' %}" ><i class="mdi mdi-finance"></i><span style="color : #1479a7;" > Clients </span></a>
+                    </li> 
+                </ul>
+                
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <!-- Left Sidebar End --> 
+
+
+    <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->                      
+            <div class="content-page">
+                <!-- Start content -->
+                <div class="content">
+                    <div class="container" >
+                        
+                        {% block page %}
+                            
+                        {% endblock %}
+
+                    </div> <!-- container -->
+                            
+                </div> <!-- content -->
+
+                <footer class="footer text-right">
+                    Developpée par <a href="mailto:chanyngoy@gmail.com">FatalSoft Pro</a> 
+                </footer>
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+
+{% endblock menu %}
+    

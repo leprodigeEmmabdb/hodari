@@ -1,0 +1,68 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="#">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="{% url 'add_user' %}" class="btn btn-inverse waves-effect waves-light m-b-5"> <i class="fa fa-plus"></i> <span>Créer</span> </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table id="datatable" class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nom d'Utilisateur</th>
+                                        <th>Nom Complet</th>
+                                        <!--th>Postnom</th>
+                                        <th>Prenom</th-->
+                                        <th>Email</th>
+                                        <th>Téléphone</th>
+                                        <th>Profil</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    {% for item in model %}
+                                        <tr>
+                                            <td style="width: 10px;"></td>
+                                            <td> <a href="{% url 'detail_user' item.id %}">{{ item.user.username }}</a></td>
+                                            <td>{{ item.nom }}</td>
+                                            <!--td>{{ item.postnom }}</td>
+                                            <td>{{ item.prenom }}</td-->
+                                            <td>{{ item.email }}</td>
+                                            <td>{{ item.phone }}</td>
+                                            <td>{{ item.profil.designation }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+
+
+{% endblock %}

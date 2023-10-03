@@ -1,0 +1,101 @@
+{% extends 'Soluplus/MainApp/Utils/shared_front.html' %}
+{% block page %}
+  
+
+
+<!-- Page-Title -->
+<div class="row">
+    <div class="col-sm-12">
+        <h4 class="pull-left page-title">{{ title }}</h4>
+        <ol class="breadcrumb pull-right">
+            <li><a href="{% url 'front_index' %}">Accueil</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </div>
+</div>
+
+<!-- Appel de la fonction message -->
+{% include 'Soluplus/MainApp/Utils/message.html' with messages=messages only %}   
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-color panel-default">
+
+            <div class="panel-heading">
+                {% if model.etat.id == 2 %}
+                    <a href="{% url 'front_arrive_groupage' model.id %}" class="btn btn-success waves-effect waves-light m-b-5"> <span>Réceptionner</span> </a>
+                {% else %}
+                    <a href="{% url 'front_index' %}" class="btn btn-default waves-effect waves-light m-b-5"> <span>Retour</span> </a>
+                {% endif %}
+            </div>
+            
+            <div class="panel-body">
+                {% if model == 0 %}
+                <div class="header text-center">
+                    <i style="font-size: 128px; color: red;" class="glyphicon glyphicon-remove-circle"></i>
+                    <h1>Le numéro du groupage scanné n'est pas valide</h1>
+                </div>
+                {% else %}
+                {% if result == 1 %}                   
+                    <br><div class="header text-center">
+                        <i style="font-size: 100px; color: green;" class="glyphicon glyphicon-ok-circle"></i>
+                    </div><br>
+                {% endif %}
+                
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Numéro :</label>
+                        <h2>{{model.numero}}</h2>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Etat :</label>
+                        <h2>{{model.etat}}</h2>
+                    </div>
+                </div>
+
+                <div class="row row_formulaire">
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Date de création :</label>
+                        <h2>{{model.date_creation}}</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="montant" class="control-label">Auteur :</label>
+                        <h2>{{model.auteur}}</h2>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <table id="datatable" class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>numero du colis</th>
+                                    <th>Poids</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for item in model.colis.all %}
+                                    <tr>
+                                        <td> 
+                                            <a href="{% url 'front_detail_colis' item.id %}">{{ item.numero }}</a>                                            
+                                        </td>
+                                        <td>{{item.poids}} {{item.unite}}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    
+</div> <!-- End Row -->
+
+{% endblock %}
