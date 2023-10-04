@@ -1,0 +1,57 @@
+{% extends 'Soluplus/MainApp/Utils/shared.html' %}
+
+{% block page %}
+  <!-- Page-Title -->
+  <div class="row">
+    <div class="col-sm-12">
+      <h4 class="pull-left page-title">{{ title }}</h4>
+      <ol class="breadcrumb pull-right">
+        <li class="active">Dashboard</li>
+        <li>
+          <a href="{% url 'app_recrutement_list_candidats' %}">Accueil</a>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">Candidat {{ model.prenom }} - {{ model.nom }}</div>
+        <div class="panel-body">
+          <div class="row row_formulaire">
+            <h6 class="affiche_detail">{{ model.nom }}</h6>
+            <div class="col-md-6">
+              <p>
+                Reference: <strong>{{ model.reference }}</strong>
+              </p>
+              <p>
+                Lettre de motivation: <strong>{{ model.phone }}</strong>
+              </p>
+              <p>
+                Diplome: <strong>{{ model.adresse }}</strong>
+              </p>
+              <p>
+                Cv: <strong>{{ model.profession }}</strong>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p>
+                Etat: <strong>{{ model.date_naissance|date:'d/m/Y' }}</strong>
+              </p>
+            </div>
+            <div class="col-md-6">
+              <p>
+                Poste: <strong>{{ model.date_naissance|date:'d/m/Y' }}</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-end">
+        <button class="btn btn-danger"><a href="" class="text-white">Delete</a></button>
+        <button class="btn btn-success"><a href="" class="text-white">Accept</a></button>
+      </div>
+    </div>
+  </div> <!-- End Row -->
+{% endblock %}

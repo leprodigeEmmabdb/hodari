@@ -31,7 +31,7 @@ from MainApp.Utils.EmailThread import send_async_mail
 
 
 from django.template.loader import render_to_string
-from weasyprint import HTML
+#from weasyprint import HTML
 import tempfile
 
 from django.utils.dateparse import parse_date
@@ -68,7 +68,7 @@ import math
 
 
 from django.shortcuts import get_object_or_404
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 
 from MainApp.Utils.report_css import report_css
 from django.views.decorators.cache import cache_control
@@ -334,6 +334,7 @@ def get_list_of_candidat_admin(request):
         if reponse != None:
             return reponse
         candidats = Model_Candidat.objects.all().order_by('-id')
+        
         context = {
             'title' : 'Listes Candidats',
             'modules' : modules,
@@ -356,15 +357,19 @@ def get_detail_of_candidat_admin(request, ref):
         if reponse != None:
             return reponse
 
-        candidat = Model_Candidat.objects.get(pk=ref)
 
+        candidat = Model_Candidat.objects.get(pk=ref)
+        type=list(Typestatusdossier)
+        dossiers_type=[list(i) for i in type]
+        print(dossiers_type)
         context = {
             'title' : 'Candidat'+''+candidat.reference,
             'modules' : modules,
             'module' : module,
             'menus' : menus,
             'menu' : menu,
-            'model': candidat
+            'model': candidat,
+            'type':dossiers_type
         }
         template = loader.get_template("Soluplus/App_Recutement/Candidat_Admin/item.html")
         return HttpResponse(template.render(context, request))
@@ -381,6 +386,7 @@ def get_list_of_candidature_admin(request):
         if reponse != None:
             return reponse
         offres = Model_Offre.objects.all().order_by('-id')
+        candidatures=Model_Candidature.objects.filter(id=ref)
         # for item in candidatures:
         #     for el in item.diplome.all():
         #         print(el.file.name)
@@ -400,15 +406,16 @@ def get_list_of_candidature_admin(request):
         print(e)
         return HttpResponseRedirect(reverse("app_tableau_recrutement"))
 
-def get_detail_of_candidature_admin(request, ref):
+def get_detail_of_candidature_admin(request, ref:int):
     try:
         droit = "VOIR_LIST_CANDIDATURE_ADMIN"
         reponse, modules, menus, module, menu = auth.getAuth(request, droit)
         if reponse != None:
             return reponse
-        candidatures = Model_Candidature.objects.filter(offre_id=ref)
+        candidatures = Model_Candidature.objects.filter(candidat_id=ref)
         totalCandidature = len(candidatures)
         totalcandidatvalide = Model_Candidature.objects.filter(offre_id=ref, status = 2).count()
+        print(f"total {totalcandidatvalide}")
         totalcandidatdecline = Model_Candidature.objects.filter(offre_id=ref, status = 3).count()
         totalcandidatwaiting = Model_Candidature.objects.filter(offre_id=ref, status = 1).count()
         statistique = {
@@ -417,22 +424,24 @@ def get_detail_of_candidature_admin(request, ref):
             'totalcandidatdecline':totalcandidatdecline,
             'totalcandidatwaiting': totalcandidatwaiting
         }
-        offre = Model_Offre.objects.get(pk=ref)
+        offre = Model_Offre.objects.filter(id=ref)
+        print(f"candidatures {candidatures}")
         context = {
             'title' : 'Détail Candidature',
             'modules' : modules,
-            'module' : module,
+            'module' : module,  
             'menus' : menus,
             'menu' : menu,
             'model': candidatures,
             'offre':offre,
             'statistique': statistique
         }
-        template = loader.get_template("Soluplus/App_Recutement/Dossier_Candidature/item.html")
+        template = loader.get_template("Soluplus/App_Recutement/Candidat_Admin/singleCandidature.html")
         return HttpResponse(template.render(context, request))
     except Exception as e:
         print("Erreur Detail Candidature Admin")
         print(e)
+        print(f"ref {ref}")
         return HttpResponseRedirect(reverse("app_recrutement_list_candidatures"))
 
 

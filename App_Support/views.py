@@ -32,7 +32,7 @@ from MainApp.Utils.EmailThread import send_async_mail
 
 
 from django.template.loader import render_to_string
-from weasyprint import HTML
+#from weasyprint import HTML
 import tempfile
 
 from django.utils.dateparse import parse_date 
@@ -66,7 +66,7 @@ import math
 
 
 from django.shortcuts import get_object_or_404 
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 
 from MainApp.Utils.report_css import report_css
 from django.views.decorators.cache import cache_control

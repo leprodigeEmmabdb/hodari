@@ -1,161 +1,107 @@
 {% extends 'Soluplus/Website/utils.html' %}
 {% load staticfiles %}
 {% block page %}
-  <section id="portfolio" class="portfolio sections-bg">
-    <div class="container" data-aos="fade-up">
-      <div class="section-header">
-        <h2>Portfolio</h2>
-        <p>Quam sed id excepturi ccusantium dolorem ut quis dolores nisi llum nostrum enim velit qui ut et autem uia reprehenderit sunt deleniti</p>
-      </div>
-
-      <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
-        <div>
-          <ul class="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Product</li>
-            <li data-filter=".filter-branding">Branding</li>
-            <li data-filter=".filter-books">Books</li>
-          </ul>
-          <!-- End Portfolio Filters -->
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio sections-bg px-4 ">
+      <div class="" data-aos="fade-up">
+        <div class="section-header text-light">
+          <p>En 2022 Hodari a lancé la série des conférences dénommée "conversations" . A travers ses conversations Hodari met face à face des professionnels aux parcours inspirants avec un public à qui ils relatent leurs parcours professionnels . C'est pour Hodari un moyen d'éduquer , aiguiser , inspirer et challenger le public.</p>
         </div>
 
-        <div class="row gy-4 portfolio-container">
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-1.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+        <div class="portfolio-isotope " data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order" data-aos="fade-up" data-aos-delay="100">
+          <div class="row mt-4">
+            <div class="row  gy-4 portfolio-container ">
+              <hr>
+              <h4 class="text-center ">Edition 1</h4>
+              <hr>
+              <div class="com-xl-4 col-lg-4  col-lg-4 col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <a href="{% static 'Website/images/portfolio/edition14.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition14.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info mb-4">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Amani CIBAMBO</a><h4/>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-1.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <a href="assets/img/portfolio/edition11.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition11.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Yvonne CHIKA</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-1.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-branding">
+                <div class="portfolio-wrap">
+                  <a href="assets/img/portfolio/edition12.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition12.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Tisya MUKUNA</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-1.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 1</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-books">
+                <div class="portfolio-wrap">
+                  <a href="assets/img/portfolio/edition13.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition13.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Blanchine MAZANGA</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
+              <!-- End edition 1 bloc -->
             </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-2.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+            <div class="row gy-4 portfolio-container mt-4 align-items-center">
+              <h4 class="text-center">Edition 2<h4/>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-app">
+                <div class="portfolio-wrap">
+                  <a href="{% static 'Website/images/portfolio/edition2.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition2.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Dieudonné NKUNZI</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-2.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-product">
+                <div class="portfolio-wrap">
+                  <a href="assets/img/portfolio/edition21.jpg" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition21.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Edwige TAKASSI</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
 
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-2.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-branding">
+                {% comment %} {% static 'Website/images/portfolio/edition11.jpg' %} {% endcomment %}
+                <div class="portfolio-wrap">
+                  <a href="{% static 'Website/images/portfolio/edition22.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition22.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Anaiah BEWA</a><h4/>
+                     
+                  </div>
+                </div>
               </div>
+              <div class="com-xl-4 col-lg-4  col-md-6 portfolio-item filter-branding ">
+                <div class="portfolio-wrap">
+                  <a href="{% static 'Website/images/portfolio/edition23.jpg' %}" data-gallery="portfolio-gallery-app" class="glightbox"><img src="{% static 'Website/images/portfolio/edition23.jpg' %}" class="img-fluid"  height="500px" alt="" /></a>
+                  <div class="portfolio-info">
+                    <h4 class="text-center"><a href="portfolio-details.html" title="More Details">Véronica KAYEMBE</a><h4/>
+                     
+                  </div>
+                </div>
+              </div>
+              <!-- End edition 2 bloc -->
             </div>
           </div>
-          <!-- End Portfolio Item -->
-
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-2.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 2</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
-
-          <div class="col-xl-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/app-3.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">App 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
-
-          <div class="col-xl-4 col-md-6 portfolio-item filter-product">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/product-3.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Product 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
-
-          <div class="col-xl-4 col-md-6 portfolio-item filter-branding">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/branding-3.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Branding 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
-
-          <div class="col-xl-4 col-md-6 portfolio-item filter-books">
-            <div class="portfolio-wrap">
-              <a href={% static 'Website/images/portfolio/edition10.jpg' %} data-gallery="portfolio-gallery-app" class="glightbox"><img src="assets/img/portfolio/books-3.jpg" class="img-fluid" alt="" /></a>
-              <div class="portfolio-info">
-                <h4><a href="portfolio-details.html" title="More Details">Books 3</a></h4>
-                <p>Lorem ipsum, dolor sit amet consectetur</p>
-              </div>
-            </div>
-          </div>
-          <!-- End Portfolio Item -->
+          <!-- End Portfolio Container -->
         </div>
-        <!-- End Portfolio Container -->
       </div>
-    </div>
-  </section>
-  <!-- End Portfolio Section -->
+    </section>
+    <!-- End Portfolio Section -->
 {% endblock %}

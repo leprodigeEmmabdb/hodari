@@ -1,4 +1,4 @@
-from weasyprint import HTML, CSS
+##from weasyprint import HTML, CSS
 from django.conf import settings
 
 class report_css(object):

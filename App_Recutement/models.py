@@ -22,7 +22,7 @@ Typestatusdossier=(
     (1, "en attente du verification"),
     (2, "accepté"),
     (3, "décliner"),
-    (3, "cv deposé"),
+    (4, "cv deposé"),
 )
 etatdossier =(
     (1, "ouvert"),
@@ -52,7 +52,7 @@ class Model_Offre(models.Model):
         return self.reference
 
 
-class Model_Candidat(Model_Personne):
+class  Model_Candidat(Model_Personne):
     reference      =   models.CharField(max_length=50,blank=True,null=True)
     profession     =   models.ForeignKey("Model_Poste_Recrutement",on_delete=models.SET_NULL,blank=True,null=True, related_name="poste_candidat")
     datecreate     =   models.DateTimeField(auto_now_add=True)
@@ -60,7 +60,7 @@ class Model_Candidat(Model_Personne):
     def __str__(self):
         return self.reference
 
-    def all_candidature(self):
+    def all_candidature(self):  
         candidatures = Model_Candidature.objects.filter(candidat_id = self.id)
         return candidatures
 

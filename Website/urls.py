@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^valeurs/$', views.get_site_valeur, name="website_valeur"),
     url(r'^mission/$', views.get_site_mission, name="website_mission"),
     url(r'^contact/$', views.get_site_contact, name="website_contact"),
+    url(r'^conversation/$', views.get_site_conversation, name="website_conversation"),
     
     
     #RECRUTEMENT
